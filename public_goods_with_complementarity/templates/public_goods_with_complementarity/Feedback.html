@@ -1,0 +1,195 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Solutions to Understand Questions
+{% endblock %}
+
+{% block content %}
+
+    <h3>Question 1</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question11 }}</span> was {% if player.question11_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question12 }}</span> was {% if player.question12_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question13 }}</span> was {% if player.question13_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Suppose your group members invest 10, 5, 8 points respectively into the group account, and you invest 0 points into the group account.
+    </p>
+    <p>
+        How much is your income from the group account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question11_correct}} points</strong>
+    </p>
+    <p>
+        How much is your income from the private account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question12_correct}} points</strong>
+    </p>
+    <p>
+        How much is your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question13_correct}} points</strong>
+    </p>
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 10 as member 1's contribution,
+        5 as member 2's contribution, 8 as member 3's contribution, and 0 as your contribution.
+        Press submit, then you will get the answers automatically.
+    </p>
+
+    <h3>Question 2</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question21 }}</span> was {% if player.question21_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question22 }}</span> was {% if player.question22_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question23 }}</span> was {% if player.question23_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Suppose your group members invest 10, 5, 8 points respectively into the group account, and you invest 5 points into the group account.
+    </p>
+    <p>
+        How much is your income from the group account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question21_correct}} points</strong>
+    </p>
+    <p>
+        How much is your income from the private account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question22_correct}} points</strong>
+    </p>
+    <p>
+        How much is your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question23_correct}} points</strong>
+    </p>
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 10 as member 1's contribution,
+        5 as member 2's contribution, 8 as member 3's contribution, and 5 as your contribution.
+        Press submit, then you will get the answers automatically.
+    </p>
+
+    <h3>Question 3</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question31 }}</span> was {% if player.question31_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question32 }}</span> was {% if player.question32_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Your answer <span  class="text-info">{{ player.question33 }}</span> was {% if player.question33_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+    <p>
+        Suppose your group members invest 10, 5, 8 points respectively into the group account, and you invest 10 points into the group account.
+    </p>
+    <p>
+        How much is your income from the group account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question31_correct}} points</strong>
+    </p>
+    <p>
+        How much is your income from the private account?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question32_correct}} points</strong>
+    </p>
+    <p>
+        How much is your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question33_correct}} points</strong>
+    </p>
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 10 as member 1's contribution,
+        5 as member 2's contribution, 8 as member 3's contribution, and 10 as your contribution.
+        Press submit, then you will get the answers automatically.
+    </p>
+
+    <h3>Question 4</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question4 }}</span> was {% if player.question4_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+
+    <p>
+        Your group members invested 2, 4, 6 points respectively. How much would you invest to maximize your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question4_correct}} points</strong>
+    </p>
+
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 2 as member 1's contribution,
+        4 as member 2's contribution, 6 as member 3's contribution. For your contribution,
+        plug in 0, 1, 2, 3, ... , 10 respectively to see your total income.
+        It turns out that investing {{Constants.question4_correct}} points gives you the highest income.
+    </p>
+
+    <h3>Question 5</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question5 }}</span> was {% if player.question5_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+
+    <p>
+        Your group members invested 8, 4, 0 points respectively. How much would you invest to maximize your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question5_correct}} points</strong>
+    </p>
+
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 2 as member 1's contribution,
+        4 as member 2's contribution, 6 as member 3's contribution. For your contribution,
+        plug in 0, 1, 2, 3, ... , 10 respectively to see your total income.
+        It turns out that investing {{Constants.question5_correct}} points gives you the highest income.
+    </p>
+
+    <h3>Question 6</h3>
+    <p>
+        Your answer <span  class="text-info">{{ player.question6 }}</span> was {% if player.question6_correct %}<span class="text-success">correct</span>
+        {% else %}<span class="text-danger">incorrect.</span>{% endif %}
+    </p>
+
+    <p>
+        Your group members invested 4, 4, 4 points respectively. How much would you invest to maximize your total income?
+    </p>
+    <p>
+        <strong>Solution: {{Constants.question6_correct}} points</strong>
+    </p>
+
+    <p>
+        <strong>Explanation:</strong> Use the calculator. Plug in 2 as member 1's contribution,
+        4 as member 2's contribution, 6 as member 3's contribution. For your contribution,
+        plug in 0, 1, 2, 3, ... , 10 respectively to see your total income.
+        It turns out that investing {{Constants.question6_correct}} points gives you the highest income.
+    </p>
+
+
+    {% next_button %}
+
+    {% include 'public_goods_with_complementarity/Instructions.html' %}
+
+{% endblock %}
