@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Points earned from quiz
+{% endblock %}
+
+{% block content %}
+    You answered {{player.count_correct_questions}} questions correct in total. You earned {{player.set_payoff}} from taking the quiz.
+    Please press the "next" button for the investment game.
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/dev/topics/templates/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+
+    {% next_button %}
+{% endblock %}

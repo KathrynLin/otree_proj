@@ -6,8 +6,7 @@
 {% endblock %}
 
 {% block content %}
-
-
+    <h4>Result of Round {{subsession.round_number}}</h4>
     <table class="table-condensed" style="width:500px; margin-top:20px;">
         <tr><td>You contributed:</td><td>{{ player.contribution }}</td></tr>
         <tr><td>Other participants contributed:</td><td></td></tr>
@@ -15,23 +14,42 @@
             <tr><td></td><td>{{ p.contribution }}</td></tr>
         {% endfor %}
 
-        <tr><td>Total contribution:</td><td>{{ group.total_contribution }}</td></tr>
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Total group income:</td><td>{{ total_group_income }}</td></tr>
+        <tr><td>Your earnings from the group account:</td><td>{{ earnings_from_public }}</td></tr>
+        <tr><td>Your earnings from the private account:</td><td>{{earnings_from_private }}</td></tr>
 
         <tr><td colspan="2"><hr/></td></tr>
 
-        <tr><td>Total earnings from the project:</td><td>{{ total_earnings }}</td></tr>
-        <tr><td>Your earnings from the project:</td><td>{{ group.individual_share }}</td></tr>
+        <tr><td>Thus your total earnings in this round:</td><td>{{ individual_earnings }}</td></tr>
+    </table>
 
-        <tr><td colspan="2"><hr/></td></tr>
-
-        <tr><td>Thus in total you earned:</td><td>{{ individual_earnings }}</td></tr>
-        <tr><td>In addition you get a participation fee of:</td><td>{{ Constants.base_points }}</td></tr>
-
-        <tr><td colspan="2"><hr/></td></tr>
-
-        <tr><td>So in sum you will get:</td><td>{{ player.payoff }}</td></tr>
+    <h4>Round history</h4>
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Your contribution</th>
+            <th>Member1's contribution</th>
+            <th>Member2's contribution</th>
+            <th>Member3's contribution</th>
+            <th>Your income from the group account</th>
+            <th>Your total income</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>{{ p.contribution }}</td>
+                {% for q in p.get_others_in_group %}
+                <td>{{ q.contribution }}</td>
+                {% endfor %}
+                <td>{{ p.group.individual_share }}
+                <td>{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
     </table>
     <p></p>
+
 
     {% next_button %}
 

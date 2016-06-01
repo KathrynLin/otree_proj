@@ -1,0 +1,62 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Results for Rounds 1–{{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        This is a summary of the rounds played.
+    </p>
+
+    <table class="table" style="width:800px; margin-top:20px;">
+        <tr>
+          <th>Round</th>
+          <th>Your contribution</th>
+          <th>Member1's contribution</th>
+          <th>Member2's contribution</th>
+          <th>Member3's contribution</th>
+          <th>Your income from the group account</th>
+          <th>Your total income</th>
+        </tr>
+        {% for p in player_in_all_rounds %}
+            <tr>
+              <td>{{ p.subsession.round_number }}</td>
+              <td>{{ p.contribution }}</td>
+              {% for q in p.get_others_in_group %}
+              <td>{{ q.contribution }}</td>
+              {% endfor %}
+              <td>{{ p.group.individual_share }}
+              <td>{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p>
+        The 3 periods that have been randomly drawn for payment are {{paying_period}}
+    </p>
+
+    <p>
+        Therefore, you earned {{ total_payoff }} from the investment game.
+    </p>
+
+    <p>
+        You earned {{ player.participant.payoff}} in total which is the income from the quiz plus the income from the investment game.
+    </p>
+
+    <p>
+        In addition to that, you get a participation fee of {{ Constants.base_points }}.
+    </p>
+
+    <p>
+        In total, you receive {{ total_plus_base }}, which is {{total_payoff_money}}.
+    </p>
+
+
+    {% next_button %}
+
+    {% include 'public_goods_with_complementarity/Instructions.html' %}
+
+{% endblock %}

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # <standard imports>
 from __future__ import division
-import math
+
 import random
 
 import otree.models
@@ -12,27 +12,19 @@ from otree.constants import BaseConstants
 from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
-author = 'Yingzhi Liang'
+author = 'Your name here'
 
 doc = """
-This is a twenty period public goods game with 4 players. The production
-function is the constant elasticity of substitution function. Players are
-rematched at the start of each period.
+Your app description
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_with_complementarity'
-    players_per_group = 4
+    name_in_url = 'quiz'
+    players_per_group = None
     num_rounds = 1
-    other_player_per_group = players_per_group - 1
-    base_points = c(50)
-
-    #"""Amount allocated to each player"""
-    rho = 0.7
-    beta = 0.4
+    point_per_correct = c(1)
     endowment = c(10)
-
     # correct answer for pre-test
     question11_correct = c(14.56)
     question12_correct = c(10)
@@ -48,48 +40,16 @@ class Constants(BaseConstants):
     question6_correct = c(1)
 
 
-
 class Subsession(BaseSubsession):
-
-    def before_session_starts(self):
-
-        players = self.get_players()
-        random.shuffle(players)
-
-        group_matrix = []
-
-        # chunk into groups of Constants.players_per_group
-        ppg = Constants.players_per_group
-        for i in range(0, len(players), ppg):
-            group_matrix.append(players[i:i + ppg])
-        self.set_groups(group_matrix)
-
+    pass
 
 
 
 class Group(BaseGroup):
-
-    total_contribution = models.CurrencyField()
-    group_income = models.CurrencyField()
-    individual_share = models.CurrencyField()
-
-    def set_payoffs(self):
-        self.total_contribution = sum([math.pow(p.contribution,Constants.rho) for p in self.get_players()] )
-        self.individual_share = Constants.beta * math.pow(self.total_contribution,float(1)/Constants.rho)
-        self.group_income = self.individual_share * Constants.players_per_group
-        for p in self.get_players():
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
-            p.payoff1 = 0
+    pass
 
 
 class Player(BasePlayer):
-
-
-    contribution = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
-    )
-
-    #private_income = Constants.endowment - Player.contribution
 
     question11 = models.CurrencyField()
     question12 = models.CurrencyField()
@@ -140,3 +100,13 @@ class Player(BasePlayer):
 
     def question6_correct(self):
         return self.question6 == Constants.question6_correct
+
+    def count_correct_questions(self):
+        self.num_correct_questions = ( int(self.question11_correct()) + int(self.question12_correct()) + int(self.question13_correct()) + int(self.question21_correct())
+                            + int(self.question22_correct()) + int(self.question23_correct()) + int(self.question31_correct()) + int(self.question32_correct())
+                            + int(self.question33_correct()) + int(self.question4_correct()) + int(self.question5_correct()) + int(self.question6_correct())
+                            )
+        return self.num_correct_questions
+    def set_payoff(self):
+        self.payoff = Constants.point_per_correct * self.count_correct_questions()
+        return self.payoff

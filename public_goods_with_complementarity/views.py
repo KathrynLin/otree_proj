@@ -33,6 +33,13 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
 
+    def vars_for_template(self):
+
+        return {
+            'player_in_previous_rounds': self.player.in_previous_rounds(),
+            'player_in_all_rounds': self.player.in_all_rounds()
+        }
+
     #timeout_submission = {'contribution': c(Constants.endowment/2)}
 
 
@@ -51,13 +58,40 @@ class Results(Page):
     def vars_for_template(self):
 
         return {
-            'total_earnings': self.group.total_contribution * Constants.efficiency_factor,
-            'individual_earnings': self.player.payoff
+            'total_group_income': self.group.group_income,
+            'earnings_from_private': Constants.endowment - self.player.contribution,
+            'earnings_from_public': self.group.individual_share,
+            'individual_earnings': self.player.payoff,
+            'player_in_previous_rounds': self.player.in_previous_rounds(),
+            'player_in_all_rounds': self.player.in_all_rounds()
         }
 
-page_sequence = [Introduction,
-            Question,
-            Feedback,
+class FinalResult(Page):
+
+
+    def is_displayed(self):
+        return self.subsession.round_number == Constants.num_rounds
+
+    def vars_for_template(self):
+        player_in_all_rounds = self.player.in_all_rounds()
+        total_payoff = sum([p.payoff for p in player_in_all_rounds])
+        total_payoff1 = self.player.participant.payoff
+
+
+        return {'player_in_all_rounds': player_in_all_rounds,
+                'total_payoff': total_payoff,
+                'total_payoff_money': total_payoff1.to_real_world_currency(self.session),
+                'total_plus_base': total_payoff + Constants.base_points}
+
+# page_sequence = [Introduction,
+#             Question,
+#             Feedback,
+#             Contribute,
+#             ResultsWaitPage,
+#             Results,
+#             FinalResult]
+page_sequence = [
             Contribute,
             ResultsWaitPage,
-            Results]
+            Results,
+            FinalResult]

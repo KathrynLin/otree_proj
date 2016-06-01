@@ -2,12 +2,39 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Contribute
+    Round {{ subsession.round_number }} of {{ Constants.num_rounds }}
 {% endblock %}
 
 {% block content %}
 
+
     {% formfield player.contribution with label="How much will you contribute to the project (from 0 to 10)?" %}
+
+    <h4>Round history</h4>
+    <table class="table">
+        <tr>
+            <th>Round</th>
+            <th>Your contribution</th>
+            <th>Member1's contribution</th>
+            <th>Member2's contribution</th>
+            <th>Member3's contribution</th>
+            <th>Your income from the group account</th>
+            <th>Your total income</th>
+        </tr>
+        {% for p in player_in_previous_rounds %}
+            <tr>
+                <td>{{ p.subsession.round_number }}</td>
+                <td>{{ p.contribution }}</td>
+                {% for q in p.get_others_in_group %}
+                <td>{{ q.contribution }}</td>
+                {% endfor %}
+                <td>{{ p.group.individual_share }}
+                <td>{{ p.payoff }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p></p>
+
 
     {% next_button %}
 

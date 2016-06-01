@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # the environment variable OTREE_PRODUCTION controls whether Django runs in
 # DEBUG mode. If OTREE_PRODUCTION==1, then DEBUG=False
 
-environ['OTREE_PRODUCTION'] = '1'
+
 if environ.get('OTREE_PRODUCTION') not in {None, '', '0'}:
     DEBUG = False
 else:
@@ -137,7 +137,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.1,
+    'real_world_currency_per_point': 0.5,
     'participation_fee': 5.00,
     'num_bots': 12,
     'doc': "",
@@ -148,11 +148,19 @@ SESSION_CONFIG_DEFAULTS = {
 SESSION_CONFIGS = [
 
     {
+        'name': 'quiz',
+        'display_name': "quiz",
+        'num_demo_participants': 1,
+        'app_sequence': ['quiz','payment_info'],
+                   },
+
+    {
         'name': 'public_goods_with_complementarity',
         'display_name': "public_goods_with_complementarity",
         'num_demo_participants': 4,
-        'app_sequence': ['public_goods_with_complementarity', 'survey', 'payment_info'],
+        'app_sequence': ['quiz','public_goods_with_complementarity','payment_info'],
                    },
+
 
     {
         'name': 'my_public_goods',
@@ -164,7 +172,7 @@ SESSION_CONFIGS = [
     {
         'name': 'public_goods',
         'display_name': "Public Goods",
-        'num_demo_participants': 3,
+        'num_demo_participants': 4,
         'app_sequence': ['public_goods', 'payment_info'],
     },
     {

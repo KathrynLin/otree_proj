@@ -35,7 +35,7 @@ keywords = ("Public Goods",)
 
 class Constants(BaseConstants):
     name_in_url = 'public_goods'
-    players_per_group = 3
+    players_per_group = 4
     num_rounds = 1
 
     #"""Amount allocated to each player"""
@@ -75,6 +75,3 @@ class Player(BasePlayer):
 
     def question_correct(self):
         return self.question == Constants.question_correct
-
-
-
