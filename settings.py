@@ -353,5 +353,14 @@ SESSION_CONFIGS = [
     },
 ]
 
+ROOMS = [
+    {
+        'name': 'SI Behavioral lab I',
+        'display_name': 'SI Behavioral lab I',
+        'participant_label_file': 'lab.txt',
+    },
+
+]
+
 # don't put anything after this point.
 otree.settings.augment_settings(globals())
