@@ -8,8 +8,8 @@
 {% block content %}
     <h4>Result of Round {{subsession.round_number}}</h4>
     <table class="table-condensed" style="width:500px; margin-top:20px;">
-        <tr><td>You contributed:</td><td>{{ player.contribution }}</td></tr>
-        <tr><td>Other participants contributed:</td><td></td></tr>
+        <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
+        <tr><td>Other participants invested:</td><td></td></tr>
         {% for p in player.get_others_in_group %}
             <tr><td></td><td>{{ p.contribution }}</td></tr>
         {% endfor %}
@@ -29,10 +29,10 @@
     <table class="table">
         <tr>
             <th>Round</th>
-            <th>Your contribution</th>
-            <th>Member1's contribution</th>
-            <th>Member2's contribution</th>
-            <th>Member3's contribution</th>
+            <th>Your investment</th>
+            <th>Member1's investment</th>
+            <th>Member2's investment</th>
+            <th>Member3's investment</th>
             <th>Your income from the group account</th>
             <th>Your total income</th>
         </tr>
@@ -44,7 +44,7 @@
                 <td>{{ q.contribution }}</td>
                 {% endfor %}
                 <td>{{ p.group.individual_share }}
-                <td>{{ p.payoff }}</td>
+                <td>{{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
     </table>

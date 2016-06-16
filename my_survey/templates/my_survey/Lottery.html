@@ -1,0 +1,95 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Lottery
+{% endblock %}
+
+{% block content %}
+
+    <h4>Please choose between Option A and Option B</h4>
+    <table class="table">
+        <tr>
+            <th>Decision</th>
+            <th>Option A</th>
+            <th>Option B</th>
+            <th>Your Choice</th>
+        </tr>
+
+        <tr>
+            <td>1st</td>
+            <td>$2.00 if the die is 1, $1.60 if the die is 2-10</td>
+            <td>$3.85 if the die is 1, $0.10 if the die is 2-10</td>
+            <td>{% formfield player.q_lottery1 %}</td>
+        </tr>
+
+        <tr>
+            <td>2nd</td>
+            <td>$2.00 if the die is 1-2, $1.60 if the die is 3-10</td>
+            <td>$3.85 if the die is 1-2, $0.10 if the die is 3-10</td>
+            <td>{% formfield player.q_lottery2 %}</td>
+        </tr>
+
+        <tr>
+            <td>3rd</td>
+            <td>$2.00 if the die is 1-3, $1.60 if the die is 4-10</td>
+            <td>$3.85 if the die is 1-3, $0.10 if the die is 4-10</td>
+            <td>{% formfield player.q_lottery3 %}</td>
+        </tr>
+
+        <tr>
+            <td>4th</td>
+            <td>$2.00 if the die is 1-4, $1.60 if the die is 5-10</td>
+            <td>$3.85 if the die is 1-4, $0.10 if the die is 5-10</td>
+            <td>{% formfield player.q_lottery4 %}</td>
+        </tr>
+
+        <tr>
+            <td>5th</td>
+            <td>$2.00 if the die is 1-5, $1.60 if the die is 6-10</td>
+            <td>$3.85 if the die is 1-5, $0.10 if the die is 6-10</td>
+            <td>{% formfield player.q_lottery5 %}</td>
+        </tr>
+
+        <tr>
+            <td>6th</td>
+            <td>$2.00 if the die is 1-6, $1.60 if the die is 7-10</td>
+            <td>$3.85 if the die is 1-6, $0.10 if the die is 7-10</td>
+            <td>{% formfield player.q_lottery6 %}</td>
+        </tr>
+
+        <tr>
+            <td>7th</td>
+            <td>$2.00 if the die is 1-7, $1.60 if the die is 8-10</td>
+            <td>$3.85 if the die is 1-7, $0.10 if the die is 8-10</td>
+            <td>{% formfield player.q_lottery7 %}</td>
+        </tr>
+
+        <tr>
+            <td>8th</td>
+            <td>$2.00 if the die is 1-8, $1.60 if the die is 9-10</td>
+            <td>$3.85 if the die is 1-8, $0.10 if the die is 9-10</td>
+            <td>{% formfield player.q_lottery8 %}</td>
+        </tr>
+
+        <tr>
+            <td>9th</td>
+            <td>$2.00 if the die is 1-9, $1.60 if the die is 10</td>
+            <td>$3.85 if the die is 1-9, $0.10 if the die is 10</td>
+            <td>{% formfield player.q_lottery9 %}</td>
+        </tr>
+
+        <tr>
+            <td>10th</td>
+            <td>$2.00 if the die is 1-10</td>
+            <td>$3.85 if the die is 1-10</td>
+            <td>{% formfield player.q_lottery10 %}</td>
+        </tr>
+    </table>
+    <p></p>
+
+    {% next_button %}
+    {% include 'my_survey/Lottery_instruction.html' %}
+
+
+{% endblock %}

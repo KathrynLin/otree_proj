@@ -27,6 +27,8 @@ class Question(Page):
 class Feedback(Page):
     def is_displayed(self):
         return True
+    def before_next_page(self):
+        self.player.set_payoff()
 
 class Results(Page):
 
@@ -34,6 +36,14 @@ class Results(Page):
 
     def is_displayed(self):
         return True
+    def vars_for_template(self):
+        payoff_so_far = self.player.participant.payoff
+
+
+        return {
+                'payoff_so_far': payoff_so_far,
+                'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)
+                }
 
 
 page_sequence = [Introduction,

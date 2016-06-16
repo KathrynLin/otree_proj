@@ -8,16 +8,16 @@
 {% block content %}
 
 
-    {% formfield player.contribution with label="How much will you contribute to the project (from 0 to 10)?" %}
+    {% formfield player.contribution with label="How much will you invest to the group account (from 0 to 10)?" %}
 
     <h4>Round history</h4>
     <table class="table">
         <tr>
             <th>Round</th>
-            <th>Your contribution</th>
-            <th>Member1's contribution</th>
-            <th>Member2's contribution</th>
-            <th>Member3's contribution</th>
+            <th>Your investment</th>
+            <th>Member1's investment</th>
+            <th>Member2's investment</th>
+            <th>Member3's investment</th>
             <th>Your income from the group account</th>
             <th>Your total income</th>
         </tr>
@@ -29,7 +29,7 @@
                 <td>{{ q.contribution }}</td>
                 {% endfor %}
                 <td>{{ p.group.individual_share }}
-                <td>{{ p.payoff }}</td>
+                <td>{{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
     </table>

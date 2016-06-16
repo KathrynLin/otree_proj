@@ -1,0 +1,42 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Lottery Result
+{% endblock %}
+
+{% block content %}
+<p>
+  Recall that you must make decisions for all choices that you face
+  before one of the decisions will be selected at random to determine your earnings.
+</p>
+
+<p>
+  After you have made all decisions and one of these has been selected to be used,
+  the program will generate a random number to calculate your earnings for the decision problem that turns out to be relevant.
+  Now we will generate the random number that determines the throw of the 10-sided die
+  in such a manner that each outcome, 1, 2, 3, 4, 5, 6, 7, 8, 9, or 10 is equally likely.
+</p>
+<p>
+  Your choice list is {{player.choice_list}}.
+</p>
+
+<strong>
+  The decision chosen for payment is {{decision_for_payment}}.
+  The random number that determines the throw of the 10-sided die is {{die_num}}.
+  You earned {{payment}} from the lottery game.
+</strong>
+
+<p>
+  In total, you earned {{payoff_so_far_money}} from the quiz, the investment game and the lottery game. 
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/dev/topics/templates/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+
+    {% next_button %}
+{% endblock %}

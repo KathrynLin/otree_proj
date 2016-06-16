@@ -14,10 +14,10 @@
     <table class="table" style="width:800px; margin-top:20px;">
         <tr>
           <th>Round</th>
-          <th>Your contribution</th>
-          <th>Member1's contribution</th>
-          <th>Member2's contribution</th>
-          <th>Member3's contribution</th>
+          <th>Your investment</th>
+          <th>Member1's investment</th>
+          <th>Member2's investment</th>
+          <th>Member3's investment</th>
           <th>Your income from the group account</th>
           <th>Your total income</th>
         </tr>
@@ -29,13 +29,13 @@
               <td>{{ q.contribution }}</td>
               {% endfor %}
               <td>{{ p.group.individual_share }}
-              <td>{{ p.payoff }}</td>
+              <td>{{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
     </table>
 
     <p>
-        The 3 periods that have been randomly drawn for payment are {{paying_period}}
+        The 6 periods that have been randomly drawn for payment are {{ paying_round }}
     </p>
 
     <p>
@@ -43,16 +43,9 @@
     </p>
 
     <p>
-        You earned {{ player.participant.payoff}} in total which is the income from the quiz plus the income from the investment game.
+        In total, you earned {{payoff_so_far}} from the quiz and the investment game, which is {{payoff_so_far_money}}.
     </p>
 
-    <p>
-        In addition to that, you get a participation fee of {{ Constants.base_points }}.
-    </p>
-
-    <p>
-        In total, you receive {{ total_plus_base }}, which is {{total_payoff_money}}.
-    </p>
 
 
     {% next_button %}

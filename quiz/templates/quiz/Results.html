@@ -6,8 +6,13 @@
 {% endblock %}
 
 {% block content %}
-    You answered {{player.count_correct_questions}} questions correct in total. You earned {{player.set_payoff}} from taking the quiz.
+  <p>
+    You answered {{player.count_correct_questions}} questions correct in total. You earned {{player.set_payoff}} from taking the quiz,
+    which is {{payoff_so_far_money}}.
+  </p>
+  <p>
     Please press the "next" button for the investment game.
+  </p>
 <!--
 Documentation on how to write a django template here:
 https://docs.djangoproject.com/en/dev/topics/templates/

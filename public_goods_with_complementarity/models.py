@@ -24,7 +24,7 @@ rematched at the start of each period.
 class Constants(BaseConstants):
     name_in_url = 'public_goods_with_complementarity'
     players_per_group = 4
-    num_rounds = 1
+    num_rounds = 4
     other_player_per_group = players_per_group - 1
     base_points = c(50)
 
@@ -64,27 +64,35 @@ class Subsession(BaseSubsession):
             group_matrix.append(players[i:i + ppg])
         self.set_groups(group_matrix)
 
+        if self.round_number == 1:
+            paying_round = random.sample(range(1, 21), 5)
+            self.session.vars['paying_round'] = paying_round
+
 
 
 
 class Group(BaseGroup):
 
-    total_contribution = models.CurrencyField()
     group_income = models.CurrencyField()
     individual_share = models.CurrencyField()
 
     def set_payoffs(self):
-        self.total_contribution = sum([math.pow(p.contribution,Constants.rho) for p in self.get_players()] )
-        self.individual_share = Constants.beta * math.pow(self.total_contribution,float(1)/Constants.rho)
+        self.individual_share = Constants.beta * math.pow(sum([math.pow(p.contribution,Constants.rho) for p in self.get_players()]),float(1)/Constants.rho)
         self.group_income = self.individual_share * Constants.players_per_group
+
         for p in self.get_players():
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
-            p.payoff1 = 0
+            if self.subsession.round_number in self.session.vars['paying_round']:
+                p.payoff = Constants.endowment - p.contribution + self.individual_share
+            else:
+                p.payoff = c(0)
+
+            p.payoff_each_round = Constants.endowment - p.contribution + self.individual_share
+
 
 
 class Player(BasePlayer):
 
-
+    payoff_each_round = models.CurrencyField()
     contribution = models.CurrencyField(
         choices=currency_range(0, Constants.endowment, c(1)),
     )
