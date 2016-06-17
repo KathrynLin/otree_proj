@@ -137,7 +137,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.25,
+    'real_world_currency_per_point': 0.20,
     'participation_fee': 0.00,
     'num_bots': 12,
     'doc': "",
@@ -355,11 +355,10 @@ SESSION_CONFIGS = [
 
 ROOMS = [
     {
-        'name': 'SI Behavioral lab I',
-        'display_name': 'SI Behavioral lab I',
+        'name': 'Behavioral_lab',
+        'display_name': 'Behavioral lab I',
         'participant_label_file': 'lab.txt',
     },
-
 ]
 
 # don't put anything after this point.
