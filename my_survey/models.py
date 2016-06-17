@@ -55,7 +55,7 @@ class Player(BasePlayer):
                                     verbose_name='Any suggestions for this experiment?')
     q_instruction4 = models.CharField(initial=None,blank=True,
                                     verbose_name='Any questions about this experiment?')
-    q_country = CountryField(blank=True, verbose_name='What is your country of citizenship?')
+    q_country = CountryField(initial=None, blank=True, verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?',blank=True,
                                         choices=range(13, 125),
                                         initial=None)
@@ -129,11 +129,11 @@ class Player(BasePlayer):
     def set_payoff(self):
         if self.choice_list()[Subsession.paying_choice - 1] == 'A':
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_safe_A * 4
+                self.payoff = Constants.lottery_safe_A * 5
             else:
-                self.payoff = Constants.lottery_safe_B * 4
+                self.payoff = Constants.lottery_safe_B * 5
         else:
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_risk_A * 4
+                self.payoff = Constants.lottery_risk_A * 5
             else:
-                self.payoff = Constants.lottery_risk_B * 4
+                self.payoff = Constants.lottery_risk_B * 5
