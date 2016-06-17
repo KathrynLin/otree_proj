@@ -360,6 +360,6 @@ ROOMS = [
         'participant_label_file': 'lab.txt',
     },
 ]
-
+SENTRY_DSN = 'http://6385b3f915c142628685bfde097702b0:8b24928ce950485c8d7df84857508719@sentry.otree.org/45'
 # don't put anything after this point.
 otree.settings.augment_settings(globals())
