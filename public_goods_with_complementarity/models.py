@@ -24,7 +24,7 @@ rematched at the start of each period.
 class Constants(BaseConstants):
     name_in_url = 'public_goods_with_complementarity'
     players_per_group = 4
-    num_rounds = 2
+    num_rounds = 20
     other_player_per_group = players_per_group - 1
     base_points = c(50)
 

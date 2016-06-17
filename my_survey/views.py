@@ -32,8 +32,8 @@ class Lottery_instruction(Page):
     form_model = models.Player
     form_fields = ['q_lottery_instruction1',
                   'q_lottery_instruction2',
-                  'q_lottery_instruction2',
-                  'q_lottery_instruction3'
+                  'q_lottery_instruction3',
+                  'q_lottery_instruction4',
                   ]
 
 class Lottery(Page):
