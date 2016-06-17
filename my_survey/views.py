@@ -10,11 +10,7 @@ from .models import Constants
 
 class Survey(Page):
     form_model = models.Player
-    form_fields = ['q_instruction1',
-                  'q_instruction2',
-                  'q_instruction3',
-                  'q_instruction4',
-                  'q_country',
+    form_fields = ['q_country',
                   'q_age',
                   'q_gender',
                   'q_ethnic',
@@ -26,7 +22,11 @@ class Survey(Page):
                   'q_siblings',
                   'q_vote',
                   'q_job',
-                  'q_income']
+                  'q_income',
+                  'q_instruction1',
+                  'q_instruction2',
+                  'q_instruction3',
+                  'q_instruction4',]
 
 class Lottery_instruction(Page):
     form_model = models.Player
@@ -70,10 +70,10 @@ class Results(Page):
 
 
 page_sequence = [
-    Survey,
     Lottery_instruction,
     Lottery,
-    Results
+    Results,
+    Survey
 ]
 
 # page_sequence = [

@@ -10,10 +10,7 @@
     <p>
         Please answer the following questions.
     </p>
-    {% formfield player.q_instruction1 %}
-    {% formfield player.q_instruction2 %}
-    {% formfield player.q_instruction3 %}
-    {% formfield player.q_instruction4 %}
+
     {% formfield player.q_country %}
     {% formfield player.q_age %}
     {% formfield player.q_gender %}
@@ -27,6 +24,10 @@
     {% formfield player.q_vote %}
     {% formfield player.q_job %}
     {% formfield player.q_income %}
+    {% formfield player.q_instruction1 %}
+    {% formfield player.q_instruction2 %}
+    {% formfield player.q_instruction3 %}
+    {% formfield player.q_instruction4 %}
 
     {% next_button %}
     {% include 'public_goods_with_complementarity/Instructions.html' %}
