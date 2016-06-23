@@ -155,7 +155,7 @@ SESSION_CONFIGS = [
                    },
 
     {
-        'name': 'public_goods_high_four_ten',
+        'name': 'public_goods_high_four',
         'display_name': "public_goods_high_four",
         'num_demo_participants': 4,
         'app_sequence': ['quiz_high_four','public_goods_high_four','my_survey', 'payment_info'],
