@@ -17,21 +17,21 @@ author = 'Yingzhi Liang'
 doc = """
 This is a twenty period public goods game with 4 players. The production
 function is the constant elasticity of substitution function. Players are
-rematched at the start of each period. In this game, rho = 0.7, beta = 0.4,
+rematched at the start of each period. In this game, rho = -2, beta = 15,
 omega = 10, n = 4.
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_with_complementarity'
+    name_in_url = 'public_goods_high_four'
     players_per_group = 4
     num_rounds = 20
     other_player_per_group = players_per_group - 1
     base_points = c(50)
 
     #"""Amount allocated to each player"""
-    rho = 0.7
-    beta = 0.4
+    rho = -2
+    beta = 15
     endowment = c(10)
 
 
@@ -54,7 +54,7 @@ class Subsession(BaseSubsession):
         self.set_groups(group_matrix)
 
         if self.round_number == 1:
-            paying_round = random.sample(range(1, 21), 5)
+            paying_round = random.sample(range(1, 21), 4)
             self.session.vars['paying_round'] = paying_round
 
 
@@ -83,5 +83,5 @@ class Player(BasePlayer):
 
     payoff_each_round = models.CurrencyField()
     contribution = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=currency_range(1, Constants.endowment, c(1)),
     )

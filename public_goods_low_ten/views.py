@@ -5,6 +5,7 @@ from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
 from .models import Constants
 
+
 class Contribute(Page):
 
     """Player: Choose how much to contribute"""

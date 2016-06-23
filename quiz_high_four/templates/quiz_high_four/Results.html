@@ -1,0 +1,26 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Points earned from review questions
+{% endblock %}
+
+{% block content %}
+  <p>
+    You answered {{player.count_correct_questions}} questions correct in total. You earned {{player.set_payoff}} from taking the review questions,
+    which is {{payoff_so_far_money}}.
+  </p>
+  <p>
+    Please press the "next" button for the investment game.
+  </p>
+<!--
+Documentation on how to write a django template here:
+https://docs.djangoproject.com/en/dev/topics/templates/
+
+Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
+http://getbootstrap.com/components/
+
+-->
+
+    {% next_button %}
+{% endblock %}

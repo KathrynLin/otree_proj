@@ -15,16 +15,16 @@ from otree.models import BaseSubsession, BaseGroup, BasePlayer
 author = 'Yingzhi Liang'
 
 doc = """
-This is a twenty period public goods game with 4 players. The production
+This is a twenty period public goods game with 10 players. The production
 function is the constant elasticity of substitution function. Players are
 rematched at the start of each period. In this game, rho = 0.7, beta = 0.4,
-omega = 10, n = 4.
+omega = 10, n = 10.
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_with_complementarity'
-    players_per_group = 4
+    name_in_url = 'public_goods_with_low_ten'
+    players_per_group = 10
     num_rounds = 20
     other_player_per_group = players_per_group - 1
     base_points = c(50)
@@ -54,7 +54,7 @@ class Subsession(BaseSubsession):
         self.set_groups(group_matrix)
 
         if self.round_number == 1:
-            paying_round = random.sample(range(1, 21), 5)
+            paying_round = random.sample(range(1, 21), 4)
             self.session.vars['paying_round'] = paying_round
 
 

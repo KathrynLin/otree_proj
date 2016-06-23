@@ -4,6 +4,12 @@
     Member 1's investment <input id='member1'><br>
     Member 2's investment <input id='member2'><br>
     Member 3's investment <input id='member3'><br>
+    Member 4's investment <input id='member4'><br>
+    Member 5's investment <input id='member5'><br>
+    Member 6's investment <input id='member6'><br>
+    Member 7's investment <input id='member7'><br>
+    Member 8's investment <input id='member8'><br>
+    Member 9's investment <input id='member9'><br>
     Your investment <br><input id='myinvestment'><br>
     <button id='cal'>Submit</button><br>
     Your income from the group account: <p id='group_income'>_______</p>
@@ -33,6 +39,12 @@
       var member1 = $('#member1').val();
       var member2 = $('#member2').val();
       var member3 = $('#member3').val();
+      var member4 = $('#member4').val();
+      var member5 = $('#member5').val();
+      var member6 = $('#member6').val();
+      var member7 = $('#member7').val();
+      var member8 = $('#member8').val();
+      var member9 = $('#member9').val();
       var my = $('#myinvestment').val();
       // $('#member1').val('')
       // $('#member2').val('')
@@ -40,7 +52,16 @@
       // $('#myinvestment').val('');
       var rho = 0.7;
       var beta = 0.4;
-      var income1 = beta*Math.pow((Math.pow(member1, rho)+ Math.pow(member2, rho) + Math.pow(member3, rho) + Math.pow(my, rho)), (1/rho));
+      var income1 = beta*Math.pow((Math.pow(member1, rho)
+                        + Math.pow(member2, rho)
+                        + Math.pow(member3, rho)
+                        + Math.pow(member4, rho)
+                        + Math.pow(member5, rho)
+                        + Math.pow(member6, rho)
+                        + Math.pow(member7, rho)
+                        + Math.pow(member8, rho)
+                        + Math.pow(member9, rho)
+                        + Math.pow(my, rho)), (1/rho));
       var income2 = 10-my;
       var income3 = income1 + income2;
       var income_from_group = income1.toFixed(2);
@@ -51,36 +72,6 @@
       $('#total_income').html('___'+total_income+'____')
     });
 
-    $('#container1').highcharts({
-        legend: {
-            enabled: false
-        },
-        title: {
-            text: 'Your total income when everyone invests x points',
-            x: -20 //center
-        },
-        xAxis: {
-            title: {
-                text: 'Investment level x'
-            },
-            tickInterval: 2
-        },
-        yAxis: {
-            title: {
-                text: 'Your total income y'
-            },
-            min:10,
-            tickInterval: 5
-        },
-
-        tooltip: {
-            pointFormat: 'x = {point.x}, y = {point.y}'
-        },
-        series: [{
-            data: [10.00, 11.90, 13.80, 15.69, 17.59, 19.49, 21.39, 23.29, 25.19, 27.08, 28.98],
-            pointStart: 0
-        }]
-    });
 
     $('#container2').highcharts({
         legend: {
@@ -132,8 +123,8 @@
             title: {
                 text: 'Your total income y'
             },
-            min:17,
-            max:21,
+            min:55,
+            max:60,
             tickInterval: 1
         },
 
@@ -141,7 +132,7 @@
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [19.61, 20.12, 20.10, 19.96, 19.75, 19.49, 19.20, 18.89, 18.55, 18.20, 17.83],
+            data: [56.16, 57.55, 58.06, 58.36, 58.55, 58.65, 58.70, 58.70, 58.66, 58.60, 58.50],
             pointStart: 0
         }]
     });
@@ -164,49 +155,19 @@
             title: {
                 text: 'Your total income y'
             },
-            min:28,
-            max:31,
-            tickInterval: 1
+            min:100,
+            max:110,
+            tickInterval: 2
         },
 
         tooltip: {
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [29.22, 30.07, 30.25, 30.27, 30.21, 30.09, 29.92, 29.72, 29.50, 29.25, 28.98],
+            data: [102.31, 104.25, 105.10, 105.69, 106.12, 106.46, 106.73, 106.94, 107.10, 107.22, 107.31],
             pointStart: 0
         }]
     });
-
-    $('#container5').highcharts({
-        legend: {
-            enabled: false
-        },
-        title: {
-            text: "Your total income when you invest 2 points and the average investment is fixed",
-            x: -20 //center
-        },
-        xAxis: {
-            categories: ['[2,2,2,2]', '[3,2,1,2]', '[4,2,0,2]', '[6,0,0,2]'],
-            title: {
-                text: "Each member's investment"
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Your total income y'
-            },
-            min:12,
-            max:14,
-            tickInterval: 1
-        },
-
-        series: [{
-            name: 'your total income',
-            data: [13.80, 13.68, 13.04, 12.14]
-        }]
-    });
-
 
   });
   </script>
@@ -224,8 +185,8 @@
     </p>
 
     <p>
-        All transactions during the experiment will be calculated in terms of points. Every 5 points equals 1 dollar (5 points = $1).
-        For example, if you earn 10 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
+        All transactions during the experiment will be calculated in terms of points. Every 20 points equals 1 dollar (20 points = $1).
+        For example, if you earn 40 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
         If your total earning is not an integer, it will be rounded towards the closest integer when you get paid.
     </p>
 
@@ -234,16 +195,16 @@
         the session is the sum of points from the three parts.
 
     <ol type="1">
-      <li>The investment game will be played for 20 rounds. At the end of the experiment, the computer will randomly select 5 rounds for payment.
+      <li>The investment game will be played for 20 rounds. At the end of the experiment, the computer will randomly select 4 rounds for payment.
       That is, there is an equal chance that any decision you make during the experiment will be the decision that counts for payment.</li>
-      <li>You will get 1 point for every question you answer correctly in the review questions.</li>
+      <li>You will get 4 points for every question you answer correctly in the review questions.</li>
       <li>You will play a lottery game in the survey which determines your payment from the survey.</li>
     </ol>
 
     <h4>The Investment Game</h4>
     <p>
         The investment game will be played for 20 rounds. At the start of each round,
-        you will be randomly matched with 3 other participants to form a group of 4.
+        you will be randomly matched with 9 other participants to form a group of 10.
         The composition of the groups will change every round, and you will never be informed of the identity of the other group members
     </p>
     <p>
@@ -276,7 +237,7 @@
      <ol>
          <li> Income from your private account. You will earn 1 point for every point you keep in your private account. If for example, you keep 10 points in your private account, your income will be 10 points.
          <li> Income from the group account. The total group income depends on the investments of all group members, and it is shared equally among all of them.
-         That is, each group member receives one quarter (1/4) of the total group income.
+         That is, each group member receives 10 percent (1/10) of the total group income.
          The exact income from the group account can be accessed through the <strong>calculator</strong> on the bottom right corner of the screen.
      </ol>
 
@@ -309,15 +270,15 @@
     <li> <strong>Your income when everyone else invest 0 points</strong>
        <ol>
          <li> If everyone in your group invest 0 points, and you invest 0 points, the total group income would be 0 points.
-            As a result, your income from the group account would be 0 points (a quarter of group income).
+            As a result, your income from the group account would be 0 points (10 percent of the group income).
             Your income from the private account would be 10 points, and your total income would be 10 points.
             <p style="color:blue;">(Use the calculator to verify this, plug in 0 for group members’ investments and 0 for your investment.)</p>
          <li> If everyone in your group invest 0 points, and you invest 5 points, the total group income would be 8 points.
-            As a result, your income from the group account would be 2 points (a quarter of group income).
+            As a result, your income from the group account would be 2 points (10 percent of the group income).
             Your income from the private account would be 5 points, and your total income would be 7 points.
             <p style="color:blue;">(Use the calculator to verify this, plug in 0 for group members’ investments and 5 for your investment.)</p>
          <li> If everyone in your group invest 0 points, and you invest 10 points, the total group income would be 16 points.
-           As a result, your income from the group account would be 4 points (a quarter of group income).
+           As a result, your income from the group account would be 4 points (10 percent of the group income).
            Your income from the private account would be 0 points, and your total income would be 4 points.
            <p style="color:blue;">(Use the calculator to verify this, plug in 0 for group members’ investments and 10 for your investment.)</p>
        </ol>
@@ -327,17 +288,17 @@
 
    <li> <strong>Your income when everyone else invest 5 points</strong>
       <ol>
-        <li> If everyone in your group invest 5 points, and you invest 0 points, the total group income would be 38.43 points.
-           As a result, your income from the group account would be 9.61 points (a quarter of group income).
-           Your income from the private account would be 10 points, and your total income would be 19.61 points.
+        <li> If everyone in your group invest 5 points, and you invest 0 points, the total group income would be 461.57 points.
+           As a result, your income from the group account would be 46.16 points (a quarter of group income).
+           Your income from the private account would be 10 points, and your total income would be 56.16 points.
            <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 0 for your investment.)</p>
-        <li> If everyone in your group invest 5 points, and you invest 5 points, the total group income would be 57.97 points.
-           As a result, your income from the group account would be 14.49 points (a quarter of group income).
-           Your income from the private account would be 5 points, and your total income would be 19.49 points.
+        <li> If everyone in your group invest 5 points, and you invest 5 points, the total group income would be 536.54 points.
+           As a result, your income from the group account would be 53.65 points (a quarter of group income).
+           Your income from the private account would be 5 points, and your total income would be 58.65 points.
            <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 5 for your investment.)</p>
-        <li> If everyone in your group invest 5 points, and you invest 10 points, the total group income would be 71.32 points.
-          As a result, your income from the group account would be 17.83 points (a quarter of group income).
-          Your income from the private account would be 0 point, and your total income would be 17.83 points.
+        <li> If everyone in your group invest 5 points, and you invest 10 points, the total group income would be 585.04 points.
+          As a result, your income from the group account would be 58.50 points (a quarter of group income).
+          Your income from the private account would be 0 point, and your total income would be 58.50 points.
           <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 10 for your investment.)</p>
       </ol>
   <h5>The following graph shows your <span style="color:red;">total income</span> if you invest X points when everyone else in your group invest 5 points.
@@ -346,17 +307,17 @@
 
   <li> <strong>Your income when everyone else invest 10 points</strong>
      <ol>
-       <li> If everyone in your group invest 10 points, and you invest 0 points, the total group income would be 76.86 points.
-          As a result, your income from the group account would be 19.22 points (a quarter of group income).
-          Your income from the private account would be 10 points, and your total income would be 29.22 points.
+       <li> If everyone in your group invest 10 points, and you invest 0 points, the total group income would be 923.13 points.
+          As a result, your income from the group account would be 92.31 points (a quarter of group income).
+          Your income from the private account would be 10 points, and your total income would be 102.31 points.
           <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 0 for your investment.)</p>
-       <li> If everyone in your group invest 10 points, and you invest 5 points, the total group income would be 100.35 points.
-          As a result, your income from the group account would be 25.09 points (a quarter of group income).
-          Your income from the private account would be 5 points, and your total income would be 30.09 points.
+       <li> If everyone in your group invest 10 points, and you invest 5 points, the total group income would be 1014.60 points.
+          As a result, your income from the group account would be 101.46  points (a quarter of group income).
+          Your income from the private account would be 5 points, and your total income would be 106.46 points.
           <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 5 for your investment.)</p>
-       <li> If everyone in your group invest 10 points, and you invest 10 points, the total group income would be 115.93 points.
-         As a result, your income from the group account would be 28.98 points (a quarter of group income).
-         Your income from the private account would be 0 points, and your total income would be 28.98 points.
+       <li> If everyone in your group invest 10 points, and you invest 10 points, the total group income would be 1073.10 points.
+         As a result, your income from the group account would be 107.31 points (a quarter of group income).
+         Your income from the private account would be 0 points, and your total income would be 107.31 points.
          <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 10 for your investment.)</p>
      </ol>
  <h5>The following graph shows your <span style="color:red;">total income</span> if you invest X points when everyone else in your group invest 10 points.
