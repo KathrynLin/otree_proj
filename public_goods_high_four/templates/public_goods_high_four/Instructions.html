@@ -40,12 +40,19 @@
       // $('#myinvestment').val('');
       var rho = -2;
       var beta = 15;
-      var income1 = beta*Math.pow((Math.pow(member1, rho)+ Math.pow(member2, rho) + Math.pow(member3, rho) + Math.pow(my, rho)), (1/rho));
-      var income2 = 10-my;
-      var income3 = income1 + income2;
-      var income_from_group = income1.toFixed(2);
-      var income_from_private = income2.toFixed(2);
-      var total_income = income3.toFixed(2);
+      if (member1*member2*member3*my == 0){
+        var income_from_group = NaN;
+        var income_from_private = NaN;
+        var total_income = NaN
+      }else{
+        var income1 = beta*Math.pow((Math.pow(member1, rho)+ Math.pow(member2, rho) + Math.pow(member3, rho) + Math.pow(my, rho)), (1/rho));
+        var income2 = 10-my;
+        var income3 = income1 + income2;
+        var income_from_group = income1.toFixed(2);
+        var income_from_private = income2.toFixed(2);
+        var total_income = income3.toFixed(2)
+      }
+
       $('#group_income').html('___'+income_from_group+'____')
       $('#private_income').html('___'+income_from_private+'____')
       $('#total_income').html('___'+total_income+'____')
