@@ -32,6 +32,7 @@ class Constants(BaseConstants):
     lottery_safe_B = c(1.60)
     lottery_risk_A = c(3.85)
     lottery_risk_B = c(0.10)
+    exchange_rate = 0.05
 
 
 
@@ -48,9 +49,9 @@ class Player(BasePlayer):
 
 
     q_instruction1 = models.CharField(initial=None,blank=True,
-                                    verbose_name='Which part of the instruction is unclear for you?(The instruction is attached at the bottom of this page.)')
+                                    verbose_name='Which part of the instruction is unclear for you?')
     q_instruction2 = models.CharField(initial=None,blank=True,
-                                    verbose_name='What can we do to make it clear?(The instruction is attached at the bottom of this page.)')
+                                    verbose_name='What can we do to make it clear?')
     q_instruction3 = models.CharField(initial=None,blank=True,
                                     verbose_name='Any suggestions for this experiment?')
     q_instruction4 = models.CharField(initial=None,blank=True,
@@ -131,11 +132,11 @@ class Player(BasePlayer):
     def set_payoff(self):
         if self.choice_list()[Subsession.paying_choice - 1] == 'A':
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_safe_A * 5
+                self.payoff = Constants.lottery_safe_A / Constants.exchange_rate
             else:
-                self.payoff = Constants.lottery_safe_B * 5
+                self.payoff = Constants.lottery_safe_B / Constants.exchange_rate
         else:
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_risk_A * 5
+                self.payoff = Constants.lottery_risk_A / Constants.exchange_rate
             else:
-                self.payoff = Constants.lottery_risk_B * 5
+                self.payoff = Constants.lottery_risk_B / Constants.exchange_rate
