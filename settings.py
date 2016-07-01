@@ -137,7 +137,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.05,
+    'real_world_currency_per_point': 0.166667,
     'participation_fee': 0.00,
     'num_bots': 12,
     'doc': "",
@@ -146,6 +146,20 @@ SESSION_CONFIG_DEFAULTS = {
 
 
 SESSION_CONFIGS = [
+
+    {
+        'name': 'quiz_high_ten',
+        'display_name': "quiz_high_ten",
+        'num_demo_participants': 1,
+        'app_sequence': ['quiz_high_ten','payment_info'],
+                   },
+
+    {
+        'name': 'public_goods_high_ten',
+        'display_name': "public_goods_high_ten",
+        'num_demo_participants': 10,
+        'app_sequence': ['quiz_high_ten','public_goods_high_ten','my_survey','payment_info'],
+                   },
 
     {
         'name': 'quiz_high_four',

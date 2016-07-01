@@ -2,28 +2,13 @@
 {% load staticfiles otree_tags %}
 
 {% block title %}
-    Results
+    Round {{ subsession.round_number }} of {{ Constants.num_rounds }}
 {% endblock %}
 
 {% block content %}
-    <h4>Result of Round {{subsession.round_number}}</h4>
-    <table class="table-condensed" style="width:500px; margin-top:20px;">
-        <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
-        <tr><td>Other participants invested:</td><td></td></tr>
-        {% for p in player.get_others_in_group %}
-            <tr><td></td><td>{{ p.contribution }}</td></tr>
-        {% endfor %}
 
-        <tr><td colspan="2"><hr/></td></tr>
 
-        <tr><td>Total group income:</td><td>{{ total_group_income }}</td></tr>
-        <tr><td>Your earnings from the group account:</td><td>{{ earnings_from_public }}</td></tr>
-        <tr><td>Your earnings from the private account:</td><td>{{earnings_from_private }}</td></tr>
-
-        <tr><td colspan="2"><hr/></td></tr>
-
-        <tr><td>Thus your total earnings in this round:</td><td>{{ individual_earnings }}</td></tr>
-    </table>
+    {% formfield player.contribution with label="How much will you invest to the group account (from 0 to 10)?" %}
 
     <h4>Round history</h4>
     <table class="table">
@@ -42,7 +27,7 @@
             <th>Your income from the group account</th>
             <th>Your total income</th>
         </tr>
-        {% for p in player_in_all_rounds %}
+        {% for p in player_in_previous_rounds %}
             <tr>
                 <td>{{ p.subsession.round_number }}</td>
                 <td>{{ p.contribution }}</td>
@@ -60,6 +45,5 @@
     {% next_button %}
 
     {% include 'public_goods_high_ten/Instructions.html' %}
-
 
 {% endblock %}

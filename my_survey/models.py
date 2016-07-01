@@ -32,7 +32,7 @@ class Constants(BaseConstants):
     lottery_safe_B = c(1.60)
     lottery_risk_A = c(3.85)
     lottery_risk_B = c(0.10)
-    exchange_rate = 0.05
+    exchange_rate = 1/6
 
 
 
