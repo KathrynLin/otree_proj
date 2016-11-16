@@ -26,7 +26,12 @@
     //   y=parseInt(y);
     //   $('#calculator').text(x+y);
     // });
-
+    $('#cal').click(function(){
+      event.preventDefault();
+      var member1 = $('#member1').val();
+      var member2 = $('#member2').val();
+      var member3 = $('#member3').val();
+      var my = $('#myinvestment').val();
 
 
       var rho = 0.7;
