@@ -38,6 +38,33 @@
       // $('#member2').val('')
       // $('#member3').val('')
       // $('#myinvestment').val('');
+      var dataPackage = {
+        member1 : member1,
+        member2 : member2,
+        member3 : member3,
+        my : my,
+        url : window.location.href,
+        //round_number : $(".session-round-number").text()
+      };
+
+      $.ajax({
+          url: "https://278dcceb.ngrok.io/Otree/saveInput.php",
+          type: "POST",
+          async: false,
+          data: dataPackage,
+          dataType: "text",
+          success: function(d) {
+              // alert("Saving information succeeded!");
+              // alert("Thank you for submitting the task! Your HIT is being processed and evaluated as part of a quality check. You'll be paid soon.");
+          },
+          fail: function() {
+              alert("Saving information failed!");
+          }
+      });
+
+
+
+
       var rho = 0.7;
       var beta = 0.4;
       var income1 = beta*Math.pow((Math.pow(member1, rho)+ Math.pow(member2, rho) + Math.pow(member3, rho) + Math.pow(my, rho)), (1/rho));
