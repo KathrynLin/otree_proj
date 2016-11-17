@@ -1,11 +1,10 @@
-{% extends "global/Base.html" %}
 {% load staticfiles otree_tags %}
 
-{% block title %}
-    Lottery Game Instructions
-{% endblock %}
+<div class="instructions well well-lg">
 
-{% block content %}
+    <h3 class="panel-sub-heading">
+        Lottery Instructions
+    </h3>
 
     <p>
       You will be making choices between two lotteries, such as those represented as "Option A" and "Option B" below.
@@ -60,6 +59,7 @@
             <td>$2.00 if the die is 1-9, $1.60 if the die is 10</td>
             <td>$3.85 if the die is 1-9, $0.10 if the die is 10</td>
             <td>{% formfield player.q_lottery_instruction2 %}</td>
+
         </tr>
     </table>
     <p></p>
@@ -84,6 +84,7 @@
             <td>$2.00 if the die is 1-9, $1.60 if the die is 10</td>
             <td>$3.85 if the die is 1-9, $0.10 if the die is 10</td>
             <td>{% formfield player.q_lottery_instruction3 %}</td>
+
         </tr>
 
         <tr>
@@ -91,6 +92,7 @@
             <td>$2.00 if the die is 1-10</td>
             <td>$3.85 if the die is 1-10</td>
             <td>{% formfield player.q_lottery_instruction4 %}</td>
+
         </tr>
     </table>
     <p></p>
@@ -123,6 +125,4 @@
         For your convenience, these instructions will remain available to you on all subsequent screens of this study.
     </p>
 
-    {% next_button %}
-
-{% endblock %}
+</div>

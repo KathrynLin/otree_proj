@@ -1,0 +1,14 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Lottery Instructions
+{% endblock %}
+
+{% block content %}
+
+    {% include 'my_survey/Lottery_instruction.html' %}
+
+    {% next_button %}
+
+{% endblock %}

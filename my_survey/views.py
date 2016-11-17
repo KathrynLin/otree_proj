@@ -7,34 +7,28 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-
-class Survey(Page):
+class Introduction(Page):
     form_model = models.Player
-    form_fields = ['q_country',
-                  'q_age',
-                  'q_gender',
-                  'q_ethnic',
-                  'q_marriage',
-                  'q_employ',
-                  'q_student',
-                  'q_education',
-                  'q_major',
-                  'q_siblings',
-                  'q_vote',
-                  'q_job',
-                  'q_income',
-                  'q_instruction1',
-                  'q_instruction2',
-                  'q_instruction3',
-                  'q_instruction4',]
+    form_fields = ['q_lottery_instruction1',
+                    'q_lottery_instruction2',
+                    'q_lottery_instruction3',
+                    'q_lottery_instruction4']
 
 class Lottery_instruction(Page):
     form_model = models.Player
     form_fields = ['q_lottery_instruction1',
-                  'q_lottery_instruction2',
-                  'q_lottery_instruction3',
-                  'q_lottery_instruction4',
-                  ]
+                    'q_lottery_instruction2',
+                    'q_lottery_instruction3',
+                    'q_lottery_instruction4']
+
+
+# class Lottery_instruction(Page):
+#     form_model = models.Player
+#     form_fields = ['q_lottery_instruction1']
+    #               'q_lottery_instruction2',
+    #               'q_lottery_instruction3',
+    #               'q_lottery_instruction4',
+    #               ]
 
 class Lottery(Page):
     form_model = models.Player
@@ -47,7 +41,11 @@ class Lottery(Page):
                   'q_lottery7',
                   'q_lottery8',
                   'q_lottery9',
-                  'q_lottery10'
+                  'q_lottery10',
+                  'q_lottery_instruction1',
+                  'q_lottery_instruction2',
+                  'q_lottery_instruction3',
+                  'q_lottery_instruction4'
                   ]
     def before_next_page(self):
         self.player.set_payoff()
@@ -69,8 +67,29 @@ class Results(Page):
             }
 
 
+class Survey(Page):
+    form_model = models.Player
+    form_fields = ['q_country',
+                  'q_age',
+                  'q_gender',
+                  'q_ethnic',
+                  'q_marriage',
+                  'q_employ',
+                  'q_student',
+                  'q_education',
+                  'q_major',
+                  'q_siblings',
+                  'q_vote',
+                  'q_job',
+                  'q_income',
+                  'q_instruction1',
+                  'q_instruction2',
+                  'q_instruction3',
+                  'q_instruction4',]
+
+
 page_sequence = [
-    Lottery_instruction,
+    Introduction,
     Lottery,
     Results,
     Survey
