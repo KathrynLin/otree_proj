@@ -23,11 +23,10 @@ omega = 10, n = 4.
 
 
 class Constants(BaseConstants):
-    name_in_url = 'public_goods_with_complementarity'
+    name_in_url = 'public_goods_low_four'
     players_per_group = 4
     num_rounds = 2
     other_player_per_group = players_per_group - 1
-    base_points = c(50)
 
     #"""Amount allocated to each player"""
     rho = 0.7
@@ -54,7 +53,7 @@ class Subsession(BaseSubsession):
         self.set_groups(group_matrix)
 
         if self.round_number == 1:
-            paying_round = random.sample(range(1, 21), 5)
+            paying_round = random.sample(range(1, 21), 4)
             self.session.vars['paying_round'] = paying_round
 
 

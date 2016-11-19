@@ -34,10 +34,35 @@
       var member2 = $('#member2').val();
       var member3 = $('#member3').val();
       var my = $('#myinvestment').val();
-      // $('#member1').val('')
-      // $('#member2').val('')
-      // $('#member3').val('')
-      // $('#myinvestment').val('');
+
+      // Import caculator data
+         var dataPackage = {
+           member1 : member1,
+           member2 : member2,
+           member3 : member3,
+           my : my,
+           url : window.location.href,
+           round_number : $(".session-round-number").text()
+         };
+
+         $.ajax({
+             url: "https://5e1523af.ngrok.io/otree/saveInput.php",
+             type: "POST",
+             async: false,
+             data: dataPackage,
+             dataType: "text",
+             success: function(d) {
+                 // alert("Saving information succeeded!");
+                 // alert("Thank you for submitting the task! Your HIT is being processed and evaluated as part of a quality check. You'll be paid soon.");
+             },
+             fail: function() {
+                 alert("Saving information failed!");
+             }
+         });
+
+       //finish import
+
+
       var rho = -2;
       var beta = 15;
       if (member1*member2*member3*my == 0){
@@ -224,69 +249,70 @@
 <div class="box effect7">
     <h3>Instructions</h3>
     <p>
-        This is an experiment in the economics of decision making. In this experiment, you are asked to make investment decisions.
-        The procedure, payment rules, and student allocation method are described below. The amount of money you earn will depend
-        on the decisions you make and on the decisions other people make. Please do not communicate with each other during the experiment.
+        This is an experiment in the economics of decision making. In this experiment, you will be asked to make investment decisions.
+        The amount of money you earn will depend
+        on the decisions you make and on the decisions other people make. Please do not communicate with other people during the experiment.
         If you have questions at any point during the experiment, raise your hand and the experimenter will help you.
     </p>
 
     <p>
-        All transactions during the experiment will be calculated in terms of points. Every 20 points equals 1 dollar (20 points = $1).
-        For example, if you earn 40 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
-        If your total earning is not an integer, it will be rounded towards the closest integer when you get paid.
+        All transactions during the experiment will be calculated in terms of points: every 30 points equals 1 dollar in cash (30 points = $1).
+        For example, if you earn 60 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
+        If your total earnings do not equal an integer, it will be rounded towards the closest integer when you get paid.
     </p>
 
     <p>
         The experiment consists three parts: the review questions, the investment game, and the survey. The total amount of points you earn during
-        the session is the sum of points from the three parts.
+        the session is the sum of points you earn from the three parts.
 
     <ol type="1">
-      <li>The investment game will be played for 20 rounds. At the end of the experiment, the computer will randomly select 4 rounds for payment.
-      That is, there is an equal chance that any decision you make during the experiment will be the decision that counts for payment.</li>
-      <li>You will get 4 points for every question you answer correctly in the review questions.</li>
-      <li>You will play a lottery game in the survey which determines your payment from the survey.</li>
+      <li>The investment game consists 20 rounds. At the end of the experiment, the computer will randomly select 4 rounds out of 20 rounds that you will get paid for:
+        there is an equal chance that any decision you make during the experiment will be one of the decisions that counts for payment.</li>
+      <li>You will get 6 points ($0.2) for every question you answer correctly in the review questions part.</li>
+      <li>A lottery game will determine your payment from the survey portion of the experiment.</li>
     </ol>
 
     <h4>The Investment Game</h4>
     <p>
-        The investment game will be played for 20 rounds. At the start of each round,
+        The investment game consists of 20 rounds. At the start of each round,
         you will be randomly matched with 3 other participants to form a group of 4.
-        The composition of the groups will change every round, and you will never be informed of the identity of the other group members
+        The composition of the groups will change every round. You will never be informed of the identity of the other group members
     </p>
     <p>
-        At the beginning of the rounds each participant in your group receives {{Constants.endowment}}.
-        Your only decision will be on how to allocate these {{Constants.endowment}} . You will have to choose how many points you want to invest in a group account
+        At the beginning of the round each participant in your group receives {{Constants.endowment}}.
+        Your only decision will be how to allocate these {{Constants.endowment}} . You will have to choose how many points you want to invest in a group account
         and how many of them you want to keep for yourself in a private account. You can invest any integer amount that is equal or greater than 1 point in the group account.
         That is, you can invest any integer amount from 1 point to 10 points, but investing 0 points is not an option.
-        Other group members will also make similar decisions. All decisions are made independently and simultaneously. That is,
-        nobody will be informed of the decisions of the other group members before everyone submits his or her decision.
+        Other group members will also make similar decisions. No one will be informed of the decisions of the other group members before everyone submits his or her decision.
     </p>
 
     <h4>End of the rounds</h4>
     <p>
         At the end of each round (after all choices are submitted), you will see:
         <ol, type = "i">
-          <li> your investment choice,
-          <li> the investment choices of the other members in your group, and
-          <li> your income.
+          <li> Your investment choice,
+          <li> The investment choices of the other members in your group
+          <li> Your income.
       </ol>
     </p>
     <p>
         Then, the next round starts and you will receive a new endowment of {{Constants.endowment}}.
     </p>
 
+
+
    <h4>Income calculation</h4>
 
    <p>
-       Each round, your total income will be the sum of the income from your private and the group accounts:
+       Each round, your total incomes will be the sum of the income from your private account and the group account:
    </p>
 
-     <ol>
-         <li> Income from your private account. You will earn 1 point for every point you keep in your private account. If for example, you keep 10 points in your private account, your income will be 10 points.
-         <li> Income from the group account. The total group income depends on the investments of all group members, and it is shared equally among all of them.
-         That is, each group member receives one quarter (1/4) of the total group income.
-         The exact income from the group account can be accessed through the <strong>calculator</strong> on the bottom right corner of the screen.
-     </ol>
+   <ol>
+       <li> Income from your private account. You will earn 1 point for every point you keep in your private account. If for example, you keep 10 points in your private account, your income will be 10 points.
+       <li> Income from the group account. The total group income depends on the investments of all group members, and it is shared equally among all of them.
+         Each group member will receive one quarter (1/4) of the total group income.
+       The exact income from the group account can be accessed through the <strong>calculator</strong> on the bottom right corner of the screen.
+   </ol>
 
    <h4>Using the calculator to compute your income</h4>
    <p>
@@ -296,17 +322,18 @@
    </p>
 
    <h4>Income from the group account</h4>
+
    <ol>
      <li> The more you and others invest, the higher the total group income.
      <li> Taking as given the investments of all other group members, consider two levels for
-       your investment in the group account (say, low investment and high investment).
+       your investment in the group account (low investment and high investment).
        Next, increase both the low investment and the high investment by 1 token.
-       The total group income will increase in both cases. However, the increase is smaller in the case of the higher investment level.
+       The total group income will increase in both cases: however, the increase is smaller in the case of the higher investment level.
      <li> When you increase your investment in the group account, the total income will not increase at a constant rate.
        The rate depends on the value of all participants’ investments in the group account.
      <li> For the same average investment in the group account,
-       the total group income would be higher if there is not much difference
-       between the investments chosen by each one of the group members.
+       The total group income will be higher if everyone puts similar investments into the group acount.
+     <li> In general, always use the calculator to understand exactly what your income will be based on different investment scenarios
    <ol>
 
    <h4>Examples</h4>
@@ -370,11 +397,11 @@
  </ul>
 
  <p>
-   You can now read the instructions at your own pace. When you finish reading,
-   click the "next" button on the screen and you will proceed to the review questions
- <p>
-   Please raise you hand if you have any questions.
- </p>
+   <p>
+     When you finish reading, click on the "next" button on the screen and you will proceed to the review questions.
+     Please raise you hand if you have any questions during the experiment.
+   </p>
+
 
 
  <p>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+import math
 from . import models
 from ._builtin import Page, WaitPage
 from otree.common import Currency as c, currency_range
@@ -12,7 +13,7 @@ class PaymentInfo(Page):
         return {
             'redemption_code': participant.label or participant.code,
             'participant': participant,
-            'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)
+            'payoff_so_far_money': round(payoff_so_far.to_real_world_currency(self.session))
         }
 
 

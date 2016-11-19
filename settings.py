@@ -137,7 +137,7 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.166667,
+    'real_world_currency_per_point': 0.125,
     'participation_fee': 0.00,
     'num_bots': 12,
     'doc': "",
@@ -190,10 +190,10 @@ SESSION_CONFIGS = [
                    },
 
     {
-        'name': 'quiz',
-        'display_name': "quiz",
+        'name': 'quiz_low_four',
+        'display_name': "quiz_low_four",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz','payment_info'],
+        'app_sequence': ['quiz_low_four','payment_info'],
                    },
     {
         'name': 'my_survey',
@@ -203,10 +203,10 @@ SESSION_CONFIGS = [
                    },
 
     {
-        'name': 'public_goods_with_complementarity',
-        'display_name': "public_goods_with_complementarity",
+        'name': 'public_goods_low_four',
+        'display_name': "public_goods_low_four",
         'num_demo_participants': 4,
-        'app_sequence': ['quiz', 'public_goods_with_complementarity', 'my_survey', 'payment_info'],
+        'app_sequence': ['quiz_low_four', 'public_goods_low_four', 'my_survey', 'payment_info'],
                    },
 
 

@@ -25,9 +25,9 @@ omega = 10, n = 10.
 class Constants(BaseConstants):
     name_in_url = 'public_goods_high_ten'
     players_per_group = 10
-    num_rounds = 20
+    num_rounds = 2
     other_player_per_group = players_per_group - 1
-    base_points = c(50)
+
 
     #"""Amount allocated to each player"""
     rho = -2

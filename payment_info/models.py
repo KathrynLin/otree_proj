@@ -8,6 +8,7 @@ from otree.models import BaseSubsession, BaseGroup, BasePlayer
 from otree import widgets
 from otree.common import Currency as c, currency_range
 import random
+import math
 # </standard imports>
 
 

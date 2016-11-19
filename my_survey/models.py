@@ -3,7 +3,7 @@
 from __future__ import division
 
 import random
-
+import otree.settings
 import otree.models
 from otree.db import models
 from otree import widgets
@@ -32,13 +32,14 @@ class Constants(BaseConstants):
     lottery_safe_B = c(1.60)
     lottery_risk_A = c(3.85)
     lottery_risk_B = c(0.10)
-    exchange_rate = 1/6
 
 
 
 class Subsession(BaseSubsession):
     paying_choice = random.randint(1, 10)
     die = random.randint(1,10)
+
+
 
 
 class Group(BaseGroup):
@@ -130,13 +131,14 @@ class Player(BasePlayer):
         return self.choice
 
     def set_payoff(self):
+        exchange_rate = self.session.config['real_world_currency_per_point']
         if self.choice_list()[Subsession.paying_choice - 1] == 'A':
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_safe_A / Constants.exchange_rate
+                self.payoff = Constants.lottery_safe_A /exchange_rate
             else:
-                self.payoff = Constants.lottery_safe_B / Constants.exchange_rate
+                self.payoff = Constants.lottery_safe_B /exchange_rate
         else:
             if Subsession.die < Subsession.paying_choice + 1:
-                self.payoff = Constants.lottery_risk_A / Constants.exchange_rate
+                self.payoff = Constants.lottery_risk_A /exchange_rate
             else:
-                self.payoff = Constants.lottery_risk_B / Constants.exchange_rate
+                self.payoff = Constants.lottery_risk_B /exchange_rate
