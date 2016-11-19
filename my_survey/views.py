@@ -59,8 +59,8 @@ class Results(Page):
         payoff_so_far = self.player.participant.payoff
 
         return {
-            'decision_for_payment': self.subsession.paying_choice,
-            'die_num': self.subsession.die,
+            'decision_for_payment': self.player.paying_choice,
+            'die_num': self.player.die,
             'payment': lottery_payoff.to_real_world_currency(self.session),
             'payoff_so_far': payoff_so_far,
             'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)

@@ -36,8 +36,8 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    paying_choice = random.randint(1, 10)
-    die = random.randint(1,10)
+    pass
+
 
 
 
@@ -48,6 +48,8 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
+    paying_choice = random.randint(1,10)
+    die = random.randint(1,10)
 
     q_instruction1 = models.CharField(initial=None,blank=True,
                                     verbose_name='Which part of the instruction is unclear for you?')
@@ -126,19 +128,22 @@ class Player(BasePlayer):
                                 widget=widgets.RadioSelectHorizontal())
     q_lottery_instruction4 = models.CharField(initial=None, blank=True, verbose_name='', choices=['A', 'B'],
                                 widget=widgets.RadioSelectHorizontal())
+
     def choice_list(self):
         self.choice = [self.q_lottery1, self.q_lottery2, self.q_lottery3, self.q_lottery4, self.q_lottery5, self.q_lottery6, self.q_lottery7, self.q_lottery8, self.q_lottery9, self.q_lottery10]
         return self.choice
 
     def set_payoff(self):
         exchange_rate = self.session.config['real_world_currency_per_point']
-        if self.choice_list()[Subsession.paying_choice - 1] == 'A':
-            if Subsession.die < Subsession.paying_choice + 1:
+
+
+        if self.choice_list()[self.paying_choice - 1] == 'A':
+            if self.die < self.paying_choice + 1:
                 self.payoff = Constants.lottery_safe_A /exchange_rate
             else:
                 self.payoff = Constants.lottery_safe_B /exchange_rate
         else:
-            if Subsession.die < Subsession.paying_choice + 1:
+            if self.die < self.paying_choice + 1:
                 self.payoff = Constants.lottery_risk_A /exchange_rate
             else:
                 self.payoff = Constants.lottery_risk_B /exchange_rate
