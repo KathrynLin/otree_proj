@@ -132,7 +132,7 @@ class Player(BasePlayer):
 
     def set_payoff(self):
         exchange_rate = self.session.config['real_world_currency_per_point']
-        if self.choice_list()[Subsession.paying_choice] == 'A':
+        if self.choice_list()[Subsession.paying_choice - 1] == 'A':
             if Subsession.die < Subsession.paying_choice + 1:
                 self.payoff = Constants.lottery_safe_A /exchange_rate
             else:
