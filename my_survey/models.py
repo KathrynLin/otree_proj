@@ -48,8 +48,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    paying_choice = random.randint(1,10)
-    die = random.randint(1,10)
+
 
     q_instruction1 = models.CharField(initial=None,blank=True,
                                     verbose_name='Which part of the instruction is unclear for you?')
@@ -135,6 +134,8 @@ class Player(BasePlayer):
 
     def set_payoff(self):
         exchange_rate = self.session.config['real_world_currency_per_point']
+        self.paying_choice = random.randint(1,10)
+        self.die = random.randint(1,10)
 
 
         if self.choice_list()[self.paying_choice - 1] == 'A':
