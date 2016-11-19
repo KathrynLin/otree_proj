@@ -36,10 +36,12 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
 
-
-
+    def before_session_starts(self):
+        paying_choice = random.randint(1,10)
+        die = random.randint(1,10)
+        self.session.vars['paying_choice'] = paying_choice
+        self.session.vars['die'] = die
 
 
 class Group(BaseGroup):
@@ -47,8 +49,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-
-
 
     q_instruction1 = models.CharField(initial=None,blank=True,
                                     verbose_name='Which part of the instruction is unclear for you?')
@@ -134,17 +134,15 @@ class Player(BasePlayer):
 
     def set_payoff(self):
         exchange_rate = self.session.config['real_world_currency_per_point']
-        self.paying_choice = random.randint(1,10)
-        self.die = random.randint(1,10)
 
 
-        if self.choice_list()[self.paying_choice - 1] == 'A':
-            if self.die < self.paying_choice + 1:
+        if self.choice_list()[self.session.vars['paying_choice'] - 1] == 'A':
+            if self.session.vars['die'] < self.session.vars['paying_choice'] + 1:
                 self.payoff = Constants.lottery_safe_A /exchange_rate
             else:
                 self.payoff = Constants.lottery_safe_B /exchange_rate
         else:
-            if self.die < self.paying_choice + 1:
+            if self.session.vars['die'] < self.session.vars['paying_choice'] + 1:
                 self.payoff = Constants.lottery_risk_A /exchange_rate
             else:
                 self.payoff = Constants.lottery_risk_B /exchange_rate
