@@ -61,6 +61,7 @@ class Results(Page):
         return {
             'decision_for_payment': self.player.paying_choice,
             'die_num': self.player.die,
+            'choice_for_payment': self.player.choice_list()[self.player.paying_choice - 1]
             'payment': lottery_payoff.to_real_world_currency(self.session),
             'payoff_so_far': payoff_so_far,
             'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)
