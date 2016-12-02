@@ -394,6 +394,7 @@ SESSION_CONFIGS = [
         ],
     },
 ]
+ROOM_DEFAULTS = {}
 
 ROOMS = [
     {
