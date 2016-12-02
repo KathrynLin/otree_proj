@@ -27,7 +27,7 @@ class Constants(BaseConstants):
     players_per_group = 4
     num_rounds = 2
     other_player_per_group = players_per_group - 1
-    
+
 
     #"""Amount allocated to each player"""
     rho = -2
@@ -54,7 +54,7 @@ class Subsession(BaseSubsession):
         self.set_groups(group_matrix)
 
         if self.round_number == 1:
-            paying_round = random.sample(range(1, 21), 4)
+            paying_round = random.sample(range(1, 21), 1)
             self.session.vars['paying_round'] = paying_round
 
 

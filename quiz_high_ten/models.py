@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     name_in_url = 'quiz_high_ten'
     players_per_group = None
     num_rounds = 1
-    point_per_correct = c(0.6)
+    point_per_correct = c(0.4)
     endowment = c(10)
     # correct answer for pre-test
     question11_correct = c(13.71)

@@ -57,6 +57,8 @@ class Results(Page):
 
         lottery_payoff = self.player.payoff
         payoff_so_far = self.player.participant.payoff
+        #decision_for_payment = self.player.paying_choice
+        #die_num = self.player.die
         decision_for_payment = self.session.vars['paying_choice']
         die_num = self.session.vars['die']
 

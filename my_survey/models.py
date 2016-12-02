@@ -38,6 +38,8 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
 
     def before_session_starts(self):
+        #paying_choice = models.IntegerField()
+        #die = models.IntegerField()
         paying_choice = random.randint(1,10)
         die = random.randint(1,10)
         self.session.vars['paying_choice'] = paying_choice
@@ -137,11 +139,14 @@ class Player(BasePlayer):
 
 
         if self.choice_list()[self.session.vars['paying_choice'] - 1] == 'A':
+        #if self.choice_list()[self.paying_choice - 1] == 'A':
+            #if self.die < self.paying_choice + 1:
             if self.session.vars['die'] < self.session.vars['paying_choice'] + 1:
                 self.payoff = Constants.lottery_safe_A /exchange_rate
             else:
                 self.payoff = Constants.lottery_safe_B /exchange_rate
         else:
+            #if self.die < self.paying_choice + 1:
             if self.session.vars['die'] < self.session.vars['paying_choice'] + 1:
                 self.payoff = Constants.lottery_risk_A /exchange_rate
             else:
