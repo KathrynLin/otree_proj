@@ -36,6 +36,33 @@
       var my = $('#myinvestment').val();
 
 
+      // Import caculator data
+         var dataPackage = {
+           member1 : member1,
+           member2 : member2,
+           member3 : member3,
+           my : my,
+           url : window.location.href,
+           round_number : $(".session-round-number-result").text()
+         };
+
+         $.ajax({
+             url: "https://d438ce35.ngrok.io/otree/saveInputHighFour_result.php",
+             type: "POST",
+             async: false,
+             data: dataPackage,
+             dataType: "text",
+             success: function(d) {
+                 // alert("Saving information succeeded!");
+                 // alert("Thank you for submitting the task! Your HIT is being processed and evaluated as part of a quality check. You'll be paid soon.");
+             },
+             fail: function() {
+                 alert("Saving information failed!");
+             }
+         });
+
+       //finish import
+
       var rho = -2;
       var beta = 15;
       if (member1*member2*member3*my == 0){

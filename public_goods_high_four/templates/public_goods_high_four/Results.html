@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Result of Round {{subsession.round_number}}</h4>
+    <h4>Result of Round <span class="session-round-number-result">{{ subsession.round_number }}</span></h4>
     <table class="table-condensed" style="width:500px; margin-top:20px;">
         <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
         <tr><td>Other participants invested:</td><td></td></tr>
@@ -53,7 +53,7 @@
 
     {% next_button %}
 
-    {% include 'public_goods_high_four/Instructions.html' %}
+    {% include 'public_goods_high_four/Instructions_quiz.html' %}
 
 
 {% endblock %}
