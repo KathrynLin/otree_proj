@@ -6,9 +6,9 @@
     Member 3's investment <input id='member3'><br>
     Your investment <br><input id='myinvestment'><br>
     <button id='cal'>Submit</button><br>
-    Your income from the group account: <p id='group_income'>_______</p>
-    Your income from the private account: <p id='private_income'>_______</p>
-    Your total income:<p id='total_income'>_______</p>
+    Your earnings from the group account: <p id='group_income'>_______</p>
+    Your earnings from the private account: <p id='private_income'>_______</p>
+    Your total earnings:<p id='total_income'>_______</p>
 
 </div>
 
@@ -46,7 +46,7 @@
          };
 
          $.ajax({
-             url: "https://c00d70e1.ngrok.io/otree/saveInputHighFour.php",
+             url: "https://d438ce35.ngrok.io/otree/saveInputHighFour.php",
              type: "POST",
              async: false,
              data: dataPackage,
@@ -88,7 +88,7 @@
             enabled: false
         },
         title: {
-            text: 'Your total income when everyone invests x points',
+            text: 'Your total earnings when everyone invests x points',
             x: -20 //center
         },
         xAxis: {
@@ -99,7 +99,7 @@
         },
         yAxis: {
             title: {
-                text: 'Your total income y'
+                text: 'Your total earnings y'
             },
             min:10,
             tickInterval: 5
@@ -119,7 +119,7 @@
             enabled: false
         },
         title: {
-            text: 'Your total income when everyone else invests 1 point',
+            text: 'Your total earnings when everyone else invests 1 point',
             x: -20 //center
         },
         xAxis: {
@@ -130,7 +130,7 @@
         },
         yAxis: {
             title: {
-                text: 'Your total income y'
+                text: 'Your total earnings y'
             },
             min:8,
             max:17,
@@ -151,7 +151,7 @@
             enabled: false
         },
         title: {
-            text: 'Your total income when everyone else invests 5 points',
+            text: 'Your total earnings when everyone else invests 5 points',
             x: -20 //center
         },
         xAxis: {
@@ -162,7 +162,7 @@
         },
         yAxis: {
             title: {
-                text: 'Your total income y'
+                text: 'Your total earnings y'
             },
             min:23,
             max:45,
@@ -183,7 +183,7 @@
             enabled: false
         },
         title: {
-            text: 'Your total income when everyone else invests 10 points',
+            text: 'Your total earnings when everyone else invests 10 points',
             x: -20 //center
         },
         xAxis: {
@@ -194,7 +194,7 @@
         },
         yAxis: {
             title: {
-                text: 'Your total income y'
+                text: 'Your total earnings y'
             },
             min:23,
             max:80,
@@ -215,7 +215,7 @@
             enabled: false
         },
         title: {
-            text: "Your total income when you invest 2 points and the average investment is fixed",
+            text: "Your total earnings when you invest 2 points and the average investment is fixed",
             x: -20 //center
         },
         xAxis: {
@@ -226,7 +226,7 @@
         },
         yAxis: {
             title: {
-                text: 'Your total income y'
+                text: 'Your total earnings y'
             },
             min:12,
             max:14,
@@ -234,7 +234,7 @@
         },
 
         series: [{
-            name: 'your total income',
+            name: 'your total earnings',
             data: [13.80, 13.68, 13.04, 12.14]
         }]
     });
@@ -249,158 +249,132 @@
 <div class="box effect7">
     <h3>Instructions</h3>
     <p>
-        This is an experiment in the economics of decision making. In this experiment, you will be asked to make investment decisions.
-        The amount of money you earn will depend
-        on the decisions you make and on the decisions other people make. Please do not communicate with other people during the experiment.
-        If you have questions at any point during the experiment, raise your hand and the experimenter will help you.
+        This is an experiment in the economics of decision making. In this experiment,
+        you will be asked to make investment decisions. The amount of money you earn will depend
+        on the decisions you make and on the decisions other people make. Please do not communicate
+        with other people during the experiment. If you have questions at any point during the experiment,
+        raise your hand and the experimenter will help you.
     </p>
 
     <p>
         All transactions during the experiment will be calculated in terms of points: every 8 points equals 1 dollar in cash (8 points = $1).
         For example, if you earn 16 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
-        If your total earnings do not equal an integer, it will be rounded towards the closest integer when you get paid.
+        If your total earnings do not equal an integer, it will be rounded towards the nearest integer.
     </p>
 
     <p>
-        The experiment consists three parts: the review questions, the investment game, and the survey. The total amount of points you earn during
-        the session is the sum of points you earn from the three parts.
+        The experiment will consist of three parts: the review questions, the investment game, and the survey.
+        The total amount of points you earn during the session will be the sum of points you earn from each of the three parts:
 
     <ol type="1">
-      <li>The investment game consists 20 rounds. At the end of the experiment, the computer will randomly select 1 round out of 20 rounds that you will get paid for:
-        there is an equal chance that any decision you make during the experiment will be one of the decisions that counts for payment.</li>
-      <li>You will get 1.6 points ($0.2) for every question you answer correctly in the review questions part.</li>
-      <li>A lottery game will determine your payment from the survey portion of the experiment.</li>
+      <li>At the end of the instructions, you will be asked to complete a set of review questions. You will get 1.6 points ($0.2) for every question you answer correctly.</li>
+      <li>The investment game will consist of 20 rounds. At the end of the experiment, the computer will randomly select 1 round out of the 20 that you will get paid for. Each round is equally likely to be selected for payment.</li>
+      <li>A lottery game will determine your payment from the final part of the experiment.</li>
     </ol>
 
     <h4>The Investment Game</h4>
     <p>
-        The investment game consists of 20 rounds. At the start of each round,
-        you will be randomly matched with 3 other participants to form a group of 4.
-        The composition of the groups will change every round. You will never be informed of the identity of the other group members
-    </p>
-    <p>
-        At the beginning of the round each participant in your group receives {{Constants.endowment}}.
-        Your only decision will be how to allocate these {{Constants.endowment}} . You will have to choose how many points you want to invest in a group account
-        and how many of them you want to keep for yourself in a private account. You can invest any integer amount that is equal or greater than 1 point in the group account.
-        That is, you can invest any integer amount from 1 point to 10 points, but investing 0 points is not an option.
-        Other group members will also make similar decisions. No one will be informed of the decisions of the other group members before everyone submits his or her decision.
+        The investment game consists of 20 rounds. At the beginning of each round, you will be randomly matched with 3 other participants to form a group of 4.
+        The composition of the groups will change every round. You will not be informed of the identity of the other group members.
+        At the beginning of the round, each participant will receive 10 points. You will decide how to divide 10 points between two investment opportunities.
+        The return from the group account depends on the actions of your fellow group members. While the return from the private account depends only on your choices. You can invest any integer amount between 1 and 10 points, inclusive, in the group account. Meanwhile, other group members will independently make similar decisions. No one will be informed of the others’ decisions until everyone submits his or her decision.
     </p>
 
-    <h4>End of the rounds</h4>
+
     <p>
-        At the end of each round (after all choices are submitted), you will see:
+        At the end of each round (after all decisions are submitted), you will see:
         <ol, type = "i">
-          <li> Your investment choice,
-          <li> The investment choices of the other members in your group
-          <li> Your income.
+          <li> Your investment decision
+          <li> The investment decisions of the other members in your group
+          <li> Your earnings
       </ol>
     </p>
     <p>
-        Then, the next round starts and you will receive a new endowment of {{Constants.endowment}}.
+        Then the next round will start. You will be randomly matched with another three participants and receive a new endowment of 10 points.
     </p>
 
 
 
-   <h4>Income calculation</h4>
+   <h4>Earnings calculation</h4>
 
    <p>
-       Each round, your total incomes will be the sum of the income from your private account and the group account:
+       Your total earnings will be the sum of the earnings from your private account and a fourth of the group account:
    </p>
 
    <ol>
-       <li> Income from your private account. You will earn 1 point for every point you keep in your private account. If for example, you keep 10 points in your private account, your income will be 10 points.
-       <li> Income from the group account. The total group income depends on the investments of all group members, and it is shared equally among all of them.
-         Each group member will receive one quarter (1/4) of the total group income.
-       The exact income from the group account can be accessed through the <strong>calculator</strong> on the bottom right corner of the screen.
+       <li> Earnings from the private account: You will earn 1 point for every point you keep in the private account. For example, if you keep 5 points in the private account, your earnings from the private account will be 5 points.
+       <li> Earnings from the group account: The earnings from the group account will depend on the investments of all group members,
+         and will be shared equally among the group members. Each group member will receive one quarter $(1/4)$ of the total return from the group account.
+         The exact earnings earned from the group account can be accessed through the <strong>calculator</strong> on the bottom right corner of the screen.
+
    </ol>
 
-   <h4>Using the calculator to compute your income</h4>
+   <h4>Using the calculator to compute your earnings</h4>
    <p>
-       The calculator on the bottom right of the screen can help you calculate your income.
-       To activate the calculator, simply fill in a hypothetical value for your own investment and for other group members’ investment;
-       then, you will get your income from the group account, your income from the private account and your total income.
+     The calculator on the bottom right of the screen can help you calculate your earnings.
+     To activate the calculator, simply fill in a hypothetical value for your own investment and
+     for other group members’ investments in the group account. The calculator will then display your earnings
+     from the group account, your earnings from the private account, and your total earnings.
+
    </p>
 
-   <h4>Income from the group account</h4>
+   <h4>Here are some facts about earnings from the group account:</h4>
 
    <ol>
-     <li> The more you and others invest, the higher the total group income.
-     <li> Taking as given the investments of all other group members, consider two levels for
-       your investment in the group account (low investment and high investment).
-       Next, increase both the low investment and the high investment by 1 token.
-       The total group income will increase in both cases: however, the increase is smaller in the case of the higher investment level.
-     <li> When you increase your investment in the group account, the total income will not increase at a constant rate.
-       The rate depends on the value of all participants’ investments in the group account.
-     <li> For the same average investment in the group account,
-       The total group income will be higher if everyone puts similar investments into the group acount.
-     <li> In general, always use the calculator to understand exactly what your income will be based on different investment scenarios
+     <li> The more you and others invest, the higher the return will be.
+     <li> Consider two levels for your investment in the group account, low investment and high investment. Next, increase both the low and the high investment by 1 point. The total return will increase in both cases; however, the increase is smaller in the case of the higher investment level.
+     <li> When you increase your investment in the group account, the total return will not increase at a constant rate. The rate of increase depends on all group members’ investment levels in the group account.
+     <li> For the same average investment in the group account, the total return will be higher if everyone invests similar amounts in the group account.
+     <li> In general, it is a good idea to use the calculator to understand exactly what your earnings will be based on different investment scenarios.
+
    <ol>
 
-   <h4>Examples</h4>
+   <h4>Examples: we will go through three examples to illustrate how the investment game works. Please take five minutes to go through the examples at your own pace.</h4>
    <ul>
-    <li> <strong>Your income when everyone else invests 1 point</strong>
+    <li> <strong>The first example demonstrates the special case when everyone else invests 1 point in the group account. </strong>
        <ol>
-         <li> If everyone else in your group invests 1 point, and you invest 1 point, the total group income would be 30.00 points.
-            As a result, your income from the group account would be 7.50 points (a quarter of group income).
-            Your income from the private account would be 9 points, and your total income would be 16.50 points.
-            <p style="color:blue;">(Use the calculator to verify this, plug in 1 for group members’ investments and 1 for your investment.)</p>
-         <li> If everyone else in your group invests 1 point, and you invest 5 points, the total group income would be 34.41 points.
-            As a result, your income from the group account would be 8.60 points (a quarter of group income).
-            Your income from the private account would be 5 points, and your total income would be 13.60 points.
-            <p style="color:blue;">(Use the calculator to verify this, plug in 1 for group members’ investments and 5 for your investment.)</p>
-         <li> If everyone else in your group invests 1 points, and you invest 10 points, the total group income would be 34.58 points.
-           As a result, your income from the group account would be 8.65 points (a quarter of group income).
-           Your income from the private account would be 0 points, and your total income would be 8.65 points.
-           <p style="color:blue;">(Use the calculator to verify this, plug in 1 for group members’ investments and 10 for your investment.)</p>
+
+          <li> If everyone else in your group invests 1 point in the group account, and you invest 1 point, the total return from the group account would be 30.00 points. As a result, your earnings from the group account would be 7.50 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 10 points.
+          <li> If everyone else in your group invests 1 point in the group account, and you invest 5 points, the total return from the group account would be 34.41 points. As a result, your earnings from the group account would be 8.60 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 13.60  points.
+          <li> If everyone else in your group invests 1 point in the group account, and you invest 10 points, the total return from the group account would be 34.58 points. As a result, your earnings from the group account would be 8.65 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 8.65 points.
        </ol>
-   <h5>The following graph shows your <span style="color:red;">total income</span> if you invest X points when everyone else in your group invests 0 points.
+   <h5>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 0 points.
    Move your mouse on the graph to see the exact numbers.</h5>
    <div id="container2" style="width: 600px; height: 400px"></div>
 
-   <li> <strong>Your income when everyone else invests 5 points</strong>
+   <li> <strong>The second example demonstrates the special case when everyone else invests 5 points in the group account. </strong>
       <ol>
-        <li> If everyone else in your group invests 5 points, and you invest 1 point, the total group income would be 56.69 points.
-           As a result, your income from the group account would be 14.17 points (a quarter of group income).
-           Your income from the private account would be 9 points, and your total income would be 23.17 points.
-           <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 0 for your investment.)</p>
-        <li> If everyone else in your group invests 5 points, and you invest 5 points, the total group income would be 150 points.
-           As a result, your income from the group account would be 37.50 points (a quarter of group income).
-           Your income from the private account would be 5 points, and your total income would be 42.50 points.
-           <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 5 for your investment.)</p>
-        <li> If everyone else in your group invests 5 points, and you invest 10 points, the total group income would be 166.41 points.
-          As a result, your income from the group account would be 41.60 points (a quarter of group income).
-          Your income from the private account would be 0 point, and your total income would be 41.60 points.
-          <p style="color:blue;">(Use the calculator to verify this, plug in 5 for group members’ investments and 10 for your investment.)</p>
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 1 points, the total return from the group account would be 56.69 points. As a result, your earnings from the group account would be 14.17 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 23.17 points.
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 5 points, the total return from the group account would be 150 points. As a result, your earnings from the group account would be 37.50 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 42.50 points.
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 10 points, the total return from the group account would be 166.41 points. As a result, your earnings from the group account would be 41.60 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 41.60 points.
       </ol>
-  <h5>The following graph shows your <span style="color:red;">total income</span> if you invest X points when everyone else in your group invests 5 points.
+  <h5>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 5 points.
   Move your mouse on the graph to see the exact numbers.</h5>
   <div id="container3" style="width: 600px; height: 400px"></div>
 
-  <li> <strong>Your income when everyone else invests 10 points</strong>
+  <li> <strong>The third example demonstrates the special case when everyone else invests 10 points in the group account. </strong>
      <ol>
-       <li> If everyone else in your group invests 10 points, and you invest 1 point, the total group income would be 59.12 points.
-          As a result, your income from the group account would be 14.78 points (a quarter of group income).
-          Your income from the private account would be 9 points, and your total income would be 23.78 points.
-          <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 1 for your investment.)</p>
-       <li> If everyone else in your group invests 10 points, and you invest 5 points, the total group income would be 226.78 points.
-          As a result, your income from the group account would be 56.69 points (a quarter of group income).
-          Your income from the private account would be 5 points, and your total income would be 61.69 points.
-          <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 5 for your investment.)</p>
-       <li> If everyone else in your group invests 10 points, and you invest 10 points, the total group income would be 300 points.
-         As a result, your income from the group account would be 75 points (a quarter of group income).
-         Your income from the private account would be 0 points, and your total income would be 75 points.
-         <p style="color:blue;">(Use the calculator to verify this, plug in 10 for group members’ investments and 10 for your investment.)</p>
+        <li> If everyone else in your group invests 10 points in the group account, and you invest 1 points, the total return from the group account would be 59.12 points. As a result, your earnings from the group account would be 14.78 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 23.78 points.
+        <li> If everyone else in your group invests 10 points in the group account, and you invest 5 points, the total return from the group account would be 226.78 points. As a result, your earnings from the group account would be 56.69 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 61.69 points.
+        <li> If everyone else in your group invests 10 points in the group account, and you invest 10 points, the total return from the group account would be 300 points. As a result, your earnings from the group account would be 28.98 points (a quarter of group earnings). Your earnings from the private account would be 75 points, and your total earnings would be 75 points.
      </ol>
- <h5>The following graph shows your <span style="color:red;">total income</span> if you invest X points when everyone else in your group invests 10 points.
+ <h5>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 10 points.
  Move your mouse on the graph to see the exact numbers.</h5>
  <div id="container4" style="width: 600px; height: 400px"></div>
  </ul>
 
+ </p>
+
  <p>
-   <p>
-     When you finish reading, click on the "next" button on the screen and you will proceed to the review questions.
-     Please raise you hand if you have any questions during the experiment.
-   </p>
+   Note that even though in all three examples we assume that everyone else in your group invests the same amount in the group account, in the actual game, they might invest different amounts in the group account.
+ </p>
+ <p>
+   Keep in mind that other people in your group face the same problem as you. Their earnings from the group account and private account follows the same rule as yours.
+ </p>
+ <p>
+   When you finish reading, click on the "next" button on the screen and you will proceed to the review questions.
+   Please raise you hand if you have any questions during the experiment.
+ </p>
 
 
 
