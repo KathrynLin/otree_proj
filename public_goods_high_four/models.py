@@ -25,7 +25,7 @@ omega = 10, n = 4.
 class Constants(BaseConstants):
     name_in_url = 'public_goods_high_four'
     players_per_group = 4
-    num_rounds = 2
+    num_rounds = 20
     other_player_per_group = players_per_group - 1
 
 
