@@ -61,13 +61,13 @@ class Player(BasePlayer):
     question32 = models.CurrencyField()
     question33 = models.CurrencyField()
     question4 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=currency_range(1, Constants.endowment, c(1)),
     )
     question5 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=currency_range(1, Constants.endowment, c(1)),
     )
     question6 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=currency_range(1, Constants.endowment, c(1)),
     )
 
 
