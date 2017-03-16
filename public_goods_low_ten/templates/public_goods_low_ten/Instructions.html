@@ -1,6 +1,7 @@
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
-<div id='calculator' style="position: fixed; width: 220px; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 25px; border: 2px solid #73AD21;">
+<div id='calculator' style="position: fixed; width: 220px; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 20px; border: 2px solid #73AD21;">
     Member 1's investment <input id='member1'><br>
     Member 2's investment <input id='member2'><br>
     Member 3's investment <input id='member3'><br>
@@ -64,7 +65,7 @@
          };
 
          $.ajax({
-             url: "https://b503a6ef.ngrok.io/otree/saveInputLowTen.php",
+             url: "https://6c47fec4.ngrok.io/otree/saveInputLowTen.php",
              type: "POST",
              async: false,
              data: dataPackage,
@@ -81,24 +82,30 @@
        //finish import
 
 
-
       var rho = 0.7;
       var beta = 0.4;
-      var income1 = beta*Math.pow((Math.pow(member1, rho)
-                        + Math.pow(member2, rho)
-                        + Math.pow(member3, rho)
-                        + Math.pow(member4, rho)
-                        + Math.pow(member5, rho)
-                        + Math.pow(member6, rho)
-                        + Math.pow(member7, rho)
-                        + Math.pow(member8, rho)
-                        + Math.pow(member9, rho)
-                        + Math.pow(my, rho)), (1/rho));
-      var income2 = 10-my;
-      var income3 = income1 + income2;
-      var income_from_group = income1.toFixed(2);
-      var income_from_private = income2.toFixed(2);
-      var total_income = income3.toFixed(2);
+      if (member1*member2*member3*member4*member5*member6*member7*member8*member9*my == 0){
+        var income_from_group = NaN;
+        var income_from_private = NaN;
+        var total_income = NaN
+      }else{
+        var income1 = beta*Math.pow((Math.pow(member1, rho)
+                          + Math.pow(member2, rho)
+                          + Math.pow(member3, rho)
+                          + Math.pow(member4, rho)
+                          + Math.pow(member5, rho)
+                          + Math.pow(member6, rho)
+                          + Math.pow(member7, rho)
+                          + Math.pow(member8, rho)
+                          + Math.pow(member9, rho)
+                          + Math.pow(my, rho)), (1/rho));
+        var income2 = 10-my;
+        var income3 = income1 + income2;
+        var income_from_group = income1.toFixed(2);
+        var income_from_private = income2.toFixed(2);
+        var total_income = income3.toFixed(2);
+      }
+
       $('#group_income').html('___'+income_from_group+'____')
       $('#private_income').html('___'+income_from_private+'____')
       $('#total_income').html('___'+total_income+'____')
@@ -133,7 +140,7 @@
         },
         series: [{
             data: [19.73, 19.70, 19.55, 19.33, 19.06, 18.77, 18.45, 18.11, 17.75, 17.37],
-            pointStart: 0
+            pointStart: 1
         }]
     });
 
@@ -164,8 +171,8 @@
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [57.55 58.06, 58.36, 58.55, 58.65, 58.70, 58.70, 58.66, 58.60, 58.50],
-            pointStart: 0
+            data: [57.55, 58.06, 58.36, 58.55, 58.65, 58.70, 58.70, 58.66, 58.60, 58.50],
+            pointStart: 1
         }]
     });
 
@@ -187,8 +194,8 @@
             title: {
                 text: 'Your total earnings y'
             },
-            min:108,
-            max:104,
+            min:104,
+            max:108,
             tickInterval: 1
         },
 
@@ -197,7 +204,7 @@
         },
         series: [{
             data: [104.25, 105.10, 105.69, 106.12, 106.46, 106.73, 106.93, 107.10, 107.22, 107.31],
-            pointStart: 0
+            pointStart: 1
         }]
     });
 
@@ -214,14 +221,14 @@
 </p>
 
 <p>
-    All transactions during the experiment will be calculated in terms of points: every 2 points equals 1 dollar in cash (2 points = $1). For example, if you earn 4 points during this session, you will be paid 2 dollars in cash at the end of the experiment. If your total earnings do not equal an integer, it will be rounded towards the nearest integer.
+    All transactions during the experiment will be calculated in terms of points: every 8 points equals 1 dollar in cash (8 points = $1). For example, if you earn 16 points during this session, you will be paid 2 dollars in cash at the end of the experiment. If your total earnings do not equal an integer, it will be rounded towards the nearest integer.
 </p>
 
 <p>
     The experiment will consist of three parts: the review questions, the investment game, and the survey. The total amount of points you earn during the session will be the sum of points you earn from each of the three parts:
 
 <ol type="1">
-  <li> At the end of the instructions, you will be asked to complete a set of review questions. You will get 0.4 points (\$0.2) for every question you answer correctly.</li>
+  <li> At the end of the instructions, you will be asked to complete a set of review questions. You will get 1.6 points ($0.2) for every question you answer correctly.</li>
   <li> The investment game will consist of 20 rounds. At the end of the experiment, the computer will randomly select 1 round out of the 20 that you will get paid for. Each round is equally likely to be selected for payment.</li>
   <li> A lottery game will determine your payment from the final part of the experiment.</li>
 </ol>
@@ -242,13 +249,13 @@
   </ol>
 </p>
 <p>
-    Then the next round will start. You will be randomly matched with another three participants and receive a new endowment of 10 points.
+    Then the next round will start. You will be randomly matched with another nine participants and receive a new endowment of 10 points.
 </p>
 
 <h4>Earnings calculation</h4>
 
 <p>
-   Your total earnings will be the sum of the earnings from your private account and a fourth of the group account:
+   Your total earnings will be the sum of the earnings from your private account and 10\% of the group account:
 </p>
 
 
@@ -284,7 +291,7 @@
     <ol>
       <li> If everyone else in your group invests 5 points in the group account, and you invest 1 points, the total return from the group account would be 485.50 points. As a result, your earnings from the group account would be 48.55 points (10 percent of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 57.55 points.
       <li> If everyone else in your group invests 5 points in the group account, and you invest 5 points, the total return from the group account would be 536.54 points. As a result, your earnings from the group account would be 53.65 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 58.65 points.
-      <li> If everyone else in your group invests 5 points in the group account, and you invest 10 points, the total return from the group account would be 585.04 points. As a result, your earnings from the group account would be 58.50 points (10 percent of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 58.50 points. e private account would be 0 points, and your total earnings would be 24.66 points.
+      <li> If everyone else in your group invests 5 points in the group account, and you invest 10 points, the total return from the group account would be 585.04 points. As a result, your earnings from the group account would be 58.50 points (10 percent of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 58.50 points.
     </ol>
 <h5>The following graph shows your total earnings if you invest x points when everyone else in your group invests 5 points in the group account.</h5>
 <div id="container3" style="width: 600px; height: 400px"></div>

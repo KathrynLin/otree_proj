@@ -26,9 +26,9 @@ class Constants(BaseConstants):
     point_per_correct = c(1.6)
     endowment = c(10)
     # correct answer for pre-test
-    question11_correct = c(69.97)
-    question12_correct = c(10)
-    question13_correct = c(79.97)
+    question11_correct = c(72.67)
+    question12_correct = c(9)
+    question13_correct = c(81.67)
     question21_correct = c(78.41)
     question22_correct = c(5)
     question23_correct = c(83.41)
@@ -36,7 +36,7 @@ class Constants(BaseConstants):
     question32_correct = c(0)
     question33_correct = c(83.83)
     question4_correct = c(5)
-    question5_correct = c(4)
+    question5_correct = c(5)
     question6_correct = c(5)
 
 
