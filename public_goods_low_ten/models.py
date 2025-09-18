@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
+from otree.api import *
 # <standard imports>
-from __future__ import division
 import math
 import random
 
-import otree.models
-from otree.db import models
-from otree import widgets
-from otree.common import Currency as c, currency_range, safe_json
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
 author = 'Yingzhi Liang'
@@ -32,7 +25,7 @@ class Constants(BaseConstants):
     #"""Amount allocated to each player"""
     rho = 0.7
     beta = 0.4
-    endowment = c(10)
+    endowment = 10
 
 
 
@@ -40,7 +33,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
 
-    def before_session_starts(self):
+    def creating_session(self):
 
         players = self.get_players()
         random.shuffle(players)
@@ -51,7 +44,7 @@ class Subsession(BaseSubsession):
         ppg = Constants.players_per_group
         for i in range(0, len(players), ppg):
             group_matrix.append(players[i:i + ppg])
-        self.set_groups(group_matrix)
+        self.set_group_matrix(group_matrix)
 
         if self.round_number == 1:
             paying_round = random.sample(range(1, 21), 1)
@@ -73,7 +66,7 @@ class Group(BaseGroup):
             if self.subsession.round_number in self.session.vars['paying_round']:
                 p.payoff = Constants.endowment - p.contribution + self.individual_share
             else:
-                p.payoff = c(0)
+                p.payoff = 0
 
             p.payoff_each_round = Constants.endowment - p.contribution + self.individual_share
 
@@ -83,5 +76,5 @@ class Player(BasePlayer):
 
     payoff_each_round = models.CurrencyField()
     contribution = models.CurrencyField(
-        choices=currency_range(1, Constants.endowment, c(1)),
+        choices=list(range(1, Constants.endowment + 1)),
     )

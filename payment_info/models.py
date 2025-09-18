@@ -1,15 +1,7 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
-from otree.db import models
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
+from otree.api import *
 
-from otree import widgets
-from otree.common import Currency as c, currency_range
 import random
 import math
-# </standard imports>
 
 
 doc = """
@@ -37,7 +29,7 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
 
-    def before_session_starts(self):
+    def creating_session(self):
         for p in self.get_players():
             p.payoff = 0
 

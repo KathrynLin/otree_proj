@@ -1,16 +1,5 @@
-# -*- coding: utf-8 -*-
-# <standard imports>
-from __future__ import division
 
-import random
-
-import otree.models
-from otree.db import models
-from otree import widgets
-from otree.common import Currency as c, currency_range, safe_json
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
-# </standard imports>
+from otree.api import *
 
 author = 'Your name here'
 
@@ -23,21 +12,21 @@ class Constants(BaseConstants):
     name_in_url = 'quiz_high_ten'
     players_per_group = None
     num_rounds = 1
-    point_per_correct = c(0.4)
-    endowment = c(10)
+    point_per_correct = 0.4
+    endowment = 10
     # correct answer for pre-test
-    question11_correct = c(13.71)
-    question12_correct = c(9)
-    question13_correct = c(22.71)
-    question21_correct = c(30.82)
-    question22_correct = c(5)
-    question23_correct = c(35.82)
-    question31_correct = c(32.98)
-    question32_correct = c(0)
-    question33_correct = c(32.98)
-    question4_correct = c(2)
-    question5_correct = c(1)
-    question6_correct = c(3)
+    question11_correct = 13.71
+    question12_correct = 9
+    question13_correct = 22.71
+    question21_correct = 30.82
+    question22_correct = 5
+    question23_correct = 35.82
+    question31_correct = 32.98
+    question32_correct = 0
+    question33_correct = 32.98
+    question4_correct = 2
+    question5_correct = 1
+    question6_correct = 3
 
 
 class Subsession(BaseSubsession):
@@ -60,15 +49,11 @@ class Player(BasePlayer):
     question31 = models.CurrencyField()
     question32 = models.CurrencyField()
     question33 = models.CurrencyField()
-    question4 = models.CurrencyField(
-        choices=currency_range(1, Constants.endowment, c(1)),
-    )
-    question5 = models.CurrencyField(
-        choices=currency_range(1, Constants.endowment, c(1)),
-    )
-    question6 = models.CurrencyField(
-        choices=currency_range(1, Constants.endowment, c(1)),
-    )
+    question4 = models.CurrencyField()
+    question5 = models.CurrencyField()
+    question6 = models.CurrencyField()
+
+    num_correct_questions = models.IntegerField(initial=0)
 
 
     def question11_correct(self):

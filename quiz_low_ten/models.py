@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
+from otree.api import *
 # <standard imports>
-from __future__ import division
 
 import random
 
-import otree.models
-from otree.db import models
-from otree import widgets
-from otree.common import Currency as c, currency_range, safe_json
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
 author = 'Your name here'
@@ -23,21 +16,21 @@ class Constants(BaseConstants):
     name_in_url = 'quiz_low_ten'
     players_per_group = None
     num_rounds = 1
-    point_per_correct = c(1.6)
-    endowment = c(10)
+    point_per_correct = 1.6
+    endowment = 10
     # correct answer for pre-test
-    question11_correct = c(72.67)
-    question12_correct = c(9)
-    question13_correct = c(81.67)
-    question21_correct = c(78.41)
-    question22_correct = c(5)
-    question23_correct = c(83.41)
-    question31_correct = c(83.83)
-    question32_correct = c(0)
-    question33_correct = c(83.83)
-    question4_correct = c(5)
-    question5_correct = c(5)
-    question6_correct = c(5)
+    question11_correct = 72.67
+    question12_correct = 9
+    question13_correct = 81.67
+    question21_correct = 78.41
+    question22_correct = 5
+    question23_correct = 83.41
+    question31_correct = 83.83
+    question32_correct = 0
+    question33_correct = 83.83
+    question4_correct = 5
+    question5_correct = 5
+    question6_correct = 5
 
 
 class Subsession(BaseSubsession):
@@ -61,14 +54,16 @@ class Player(BasePlayer):
     question32 = models.CurrencyField()
     question33 = models.CurrencyField()
     question4 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
     question5 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
     question6 = models.CurrencyField(
-        choices=currency_range(0, Constants.endowment, c(1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
+
+    num_correct_questions = models.IntegerField(initial=0)
 
 
     def question11_correct(self):

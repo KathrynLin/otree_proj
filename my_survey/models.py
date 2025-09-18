@@ -1,19 +1,10 @@
-# -*- coding: utf-8 -*-
+from otree.api import *
 # <standard imports>
-from __future__ import division
 
 import random
-import otree.settings
-import otree.models
-from otree.db import models
-from otree import widgets
-from otree.common import Currency as c, currency_range, safe_json
-from otree.constants import BaseConstants
-from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
-from django_countries.fields import CountryField
-from django import forms
+# Removed Django dependencies for modern oTree
 
 author = 'Yingzhi Liang'
 
@@ -28,16 +19,16 @@ class Constants(BaseConstants):
     name_in_url = 'my_survey'
     players_per_group = None
     num_rounds = 1
-    lottery_safe_A = c(2.00)
-    lottery_safe_B = c(1.60)
-    lottery_risk_A = c(3.85)
-    lottery_risk_B = c(0.10)
+    lottery_safe_A = 2.00
+    lottery_safe_B = 1.60
+    lottery_risk_A = 3.85
+    lottery_risk_B = 0.10
 
 
 
 class Subsession(BaseSubsession):
 
-    def before_session_starts(self):
+    def creating_session(self):
         #paying_choice = models.IntegerField()
         #die = models.IntegerField()
         paying_choice = random.randint(1,10)
@@ -60,9 +51,9 @@ class Player(BasePlayer):
                                     verbose_name='Any suggestions for this experiment?')
     q_instruction4 = models.CharField(initial=None,blank=True,
                                     verbose_name='Any questions about this experiment?')
-    q_country = CountryField(blank=True,verbose_name='What is your country of citizenship?')
+    q_country = models.StringField(blank=True,verbose_name='What is your country of citizenship?')
     q_age = models.PositiveIntegerField(verbose_name='What is your age?',blank=True,
-                                        choices=range(13, 125),
+                                        choices=list(range(13, 125)),
                                         initial=None)
     q_gender = models.CharField(initial=None,blank=True,
                                 choices=['Male', 'Female'],

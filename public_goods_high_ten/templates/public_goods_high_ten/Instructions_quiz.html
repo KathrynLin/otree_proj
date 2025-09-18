@@ -1,6 +1,6 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
-<div id='calculator' style="position: fixed; width: 220px; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 20px; border: 2px solid #73AD21;">
+<div id='calculator' style="position: fixed; width: 250px; height: auto; max-height: 800px; overflow-y: auto; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 20px; border: 2px solid #73AD21; box-sizing: border-box; line-height: 1.2;">
     Member 1's investment <input id='member1'><br>
     Member 2's investment <input id='member2'><br>
     Member 3's investment <input id='member3'><br>
@@ -12,9 +12,9 @@
     Member 9's investment <input id='member9'><br>
     Your investment <br><input id='myinvestment'><br>
     <button id='cal'>Submit</button><br>
-    Your earnings from the group account: <p id='group_income'>_______</p>
-    Your earnings from the private account: <p id='private_income'>_______</p>
-    Your total earnings:<p id='total_income'>_______</p>
+    Your earnings from the group account: <span id='group_income' style="display: inline-block; height: 20px; line-height: 20px;">_______</span><br>
+    Your earnings from the private account: <span id='private_income' style="display: inline-block; height: 20px; line-height: 20px;">_______</span><br>
+    Your total earnings: <span id='total_income' style="display: inline-block; height: 20px; line-height: 20px;">_______</span>
 
 </div>
 
@@ -105,9 +105,9 @@
         var total_income = income3.toFixed(2);
       }
 
-      $('#group_income').html('___'+income_from_group+'____')
-      $('#private_income').html('___'+income_from_private+'____')
-      $('#total_income').html('___'+total_income+'____')
+      $('#group_income').html('___'+income_from_group+'____');
+      $('#private_income').html('___'+income_from_private+'____');
+      $('#total_income').html('___'+total_income+'____');
     });
 
 

@@ -1,6 +1,6 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
-<div id='calculator' style="position: fixed; width: 220px; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 20px; border: 2px solid #73AD21;">
+<div id='calculator' style="position: fixed; padding:30px; right:20px; bottom:20px; z-index:999; border-radius: 20px; border: 2px solid #73AD21;">
     Member 1's investment <input id='member1'><br>
     Member 2's investment <input id='member2'><br>
     Member 3's investment <input id='member3'><br>
@@ -105,9 +105,9 @@
         var total_income = income3.toFixed(2);
       }
 
-      $('#group_income').html('___'+income_from_group+'____')
-      $('#private_income').html('___'+income_from_private+'____')
-      $('#total_income').html('___'+total_income+'____')
+      $('#group_income').html('___'+income_from_group+'____');
+      $('#private_income').html('___'+income_from_private+'____');
+      $('#total_income').html('___'+total_income+'____');
     });
 
 
@@ -241,7 +241,7 @@
     <h4>At the end of each round</h4>
     <p>
         At the end of each round (after all choices are submitted), you will see:
-        <ol, type = "i">
+        <ol type="i">
           <li> item Your investment decision </li>
           <li> The investment decisions of the other members in your group </li>
           <li> Your earnings</li>
