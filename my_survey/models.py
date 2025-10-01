@@ -122,8 +122,8 @@ class Player(BasePlayer):
                                 widget=widgets.RadioSelectHorizontal())
 
     def choice_list(self):
-        self.choice = [self.q_lottery1, self.q_lottery2, self.q_lottery3, self.q_lottery4, self.q_lottery5, self.q_lottery6, self.q_lottery7, self.q_lottery8, self.q_lottery9, self.q_lottery10]
-        return self.choice
+        choices = [self.q_lottery1, self.q_lottery2, self.q_lottery3, self.q_lottery4, self.q_lottery5, self.q_lottery6, self.q_lottery7, self.q_lottery8, self.q_lottery9, self.q_lottery10]
+        return choices
 
     def set_payoff(self):
         exchange_rate = self.session.config['real_world_currency_per_point']

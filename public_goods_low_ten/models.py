@@ -76,5 +76,5 @@ class Player(BasePlayer):
 
     payoff_each_round = models.CurrencyField()
     contribution = models.CurrencyField(
-        choices=list(range(1, Constants.endowment + 1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )

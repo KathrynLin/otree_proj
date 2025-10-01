@@ -6,6 +6,53 @@
 {% endblock %}
 
 {% block content %}
+<style>
+/* Enhanced input box styling */
+.otree-form-group input[type="number"],
+.otree-form-group input[type="text"] {
+    width: 100px !important;
+    padding: 8px 10px !important;
+    border: 2px solid #ced4da !important;
+    border-radius: 6px !important;
+    font-size: 0.95em !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    background-color: #f8f9fa !important;
+}
+
+.otree-form-group input[type="number"]:focus,
+.otree-form-group input[type="text"]:focus {
+    outline: none !important;
+    border-color: #007bff !important;
+    background-color: white !important;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1) !important;
+}
+
+.otree-form-group input[type="number"]:hover,
+.otree-form-group input[type="text"]:hover {
+    border-color: #007bff !important;
+    background-color: white !important;
+}
+
+/* Style the input group to make both containers same height */
+.input-group {
+    height: 42px !important;
+}
+
+.input-group-text {
+    padding: 0 12px !important;
+    font-size: 1em !important;
+    height: 42px !important;
+    line-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.input-group .form-control {
+    height: 42px !important;
+}
+</style>
+
     <p>
       You will get 0.4 point for each correct answer.
     </p>

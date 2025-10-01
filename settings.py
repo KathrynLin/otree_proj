@@ -67,7 +67,7 @@ SESSION_CONFIGS = [
     {
         'name': 'public_goods_high_ten',
         'display_name': "public_goods_high_ten",
-        'num_demo_participants': 10,
+        'num_demo_participants': 2,
         'app_sequence': ['quiz_high_ten','public_goods_high_ten','my_survey','payment_info'],
                    },
 

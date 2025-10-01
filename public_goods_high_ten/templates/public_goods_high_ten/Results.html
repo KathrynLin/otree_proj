@@ -30,15 +30,9 @@
         <tr>
             <th>Round</th>
             <th>Your investment</th>
-            <th>Member1's investment</th>
-            <th>Member2's investment</th>
-            <th>Member3's investment</th>
-            <th>Member4's investment</th>
-            <th>Member5's investment</th>
-            <th>Member6's investment</th>
-            <th>Member7's investment</th>
-            <th>Member8's investment</th>
-            <th>Member9's investment</th>
+            {% for i in other_players_range %}
+            <th>Member{{ i }}'s investment</th>
+            {% endfor %}
             <th>Your income from the group account</th>
             <th>Your total income</th>
         </tr>
@@ -49,7 +43,7 @@
                 {% for q in p.get_others_in_group %}
                 <td>{{ q.contribution }}</td>
                 {% endfor %}
-                <td>{{ p.group.individual_share }}
+                <td>{{ p.group.individual_share }}</td>
                 <td>{{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
