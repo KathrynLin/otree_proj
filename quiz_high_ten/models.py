@@ -55,6 +55,8 @@ class Player(BasePlayer):
 
     num_correct_questions = models.IntegerField(initial=0)
 
+    # Store calculator usage as JSON string
+    calculator_usage_log = models.LongStringField(blank=True)
 
     def question11_correct(self):
         return self.question11 == Constants.question11_correct

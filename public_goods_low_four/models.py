@@ -46,7 +46,7 @@ class Subsession(BaseSubsession):
         self.set_group_matrix(group_matrix)
 
         if self.round_number == 1:
-            paying_round = random.sample(range(1, 21), 1)
+            paying_round = random.sample(range(1, Constants.num_rounds + 1), 1)
             self.session.vars['paying_round'] = paying_round
 
 
@@ -58,16 +58,19 @@ class Group(BaseGroup):
     individual_share = models.CurrencyField()
 
     def set_payoffs(self):
-        self.individual_share = Constants.beta * math.pow(sum([math.pow(p.contribution,Constants.rho) for p in self.get_players()]),float(1)/Constants.rho)
+        # Calculate individual share from group contributions
+        contributions = [p.contribution if p.contribution is not None else 0 for p in self.get_players()]
+        self.individual_share = Constants.beta * math.pow(sum([math.pow(c, Constants.rho) for c in contributions]), float(1)/Constants.rho)
         self.group_income = self.individual_share * Constants.players_per_group
 
         for p in self.get_players():
+            contribution = p.contribution if p.contribution is not None else 0
             if self.subsession.round_number in self.session.vars['paying_round']:
-                p.payoff = Constants.endowment - p.contribution + self.individual_share
+                p.payoff = Constants.endowment - contribution + self.individual_share
             else:
                 p.payoff = 0
 
-            p.payoff_each_round = Constants.endowment - p.contribution + self.individual_share
+            p.payoff_each_round = Constants.endowment - contribution + self.individual_share
 
 
 
@@ -77,3 +80,6 @@ class Player(BasePlayer):
     contribution = models.CurrencyField(
         choices=list(range(0, Constants.endowment + 1)),
     )
+
+    # Store calculator usage as JSON string for all submissions
+    calculator_usage_log = models.LongStringField(blank=True)

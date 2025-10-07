@@ -3,6 +3,10 @@ from otree.api import *
 
 class Introduction(Page):
     """Description of the game: How to play and returns expected"""
+
+    form_model = 'player'
+    form_fields = ['calculator_usage_log']
+
     def is_displayed(self):
         return True
 
@@ -13,10 +17,14 @@ class Question(Page):
 
     form_model = 'player'
     form_fields = ['question11','question12','question13',
-    'question21','question22','question23','question31','question32','question33','question4','question5','question6']
+    'question21','question22','question23','question31','question32','question33','question4','question5','question6', 'calculator_usage_log']
 
 
 class Feedback(Page):
+
+    form_model = 'player'
+    form_fields = ['calculator_usage_log']
+
     def is_displayed(self):
         return True
 

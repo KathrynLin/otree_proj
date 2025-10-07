@@ -35,7 +35,7 @@
     </table>
 
     <p>
-        The 1 period that have been randomly drawn for payment is {{ paying_round }}
+        The period that have been randomly drawn for payment is period {{ paying_round }}
     </p>
 
     <p>
@@ -51,5 +51,6 @@
     {% next_button %}
 
     {% include 'public_goods_high_four/Instructions.html' %}
+    {% include 'public_goods_high_four/CalculatorLogger.html' %}
 
 {% endblock %}

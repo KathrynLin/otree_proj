@@ -51,43 +51,43 @@ class Player(BasePlayer):
                                     verbose_name='Any suggestions for this experiment?')
     q_instruction4 = models.CharField(initial=None,blank=True,
                                     verbose_name='Any questions about this experiment?')
-    q_country = models.StringField(blank=True,verbose_name='What is your country of citizenship?')
-    q_age = models.PositiveIntegerField(verbose_name='What is your age?',blank=True,
+    q_country = models.StringField(verbose_name='What is your country of citizenship?')
+    q_age = models.PositiveIntegerField(verbose_name='What is your age?',
                                         choices=list(range(13, 125)),
                                         initial=None)
-    q_gender = models.CharField(initial=None,blank=True,
+    q_gender = models.CharField(initial=None,
                                 choices=['Male', 'Female'],
                                 verbose_name='What is your gender?',
                                 widget=widgets.RadioSelect())
-    q_ethnic = models.CharField(initial=None,blank=True,
+    q_ethnic = models.CharField(initial=None,
                                 verbose_name='Which of the following best describes your racial or ethnic background?',
                                 choices=['Asian', 'Black', 'Hispanic', 'Multi-racial', 'Native-American', 'Caucasion'])
-    q_marriage = models.CharField(initial=None,blank=True,verbose_name='What is your marital status?',
+    q_marriage = models.CharField(initial=None,verbose_name='What is your marital status?',
                                 choices=['Never Married', 'Currently Married', 'Previously Married'])
-    q_employ = models.CharField(initial=None,blank=True,verbose_name='How would you best describe your employment status?',
+    q_employ = models.CharField(initial=None,verbose_name='How would you best describe your employment status?',
                                 choices=['Employed, Full Time', 'Employed, Part Time', 'Not Employed'])
-    q_student = models.CharField(initial=None,blank=True,verbose_name='What is your student status?',
+    q_student = models.CharField(initial=None,verbose_name='What is your student status?',
                                 choices=['Full Time', 'Part Time (less than the normal full-course load)', 'Non Student'])
-    q_education = models.CharField(initial=None,blank=True,verbose_name='What is the highest level of study that you have completed?(Use your current year in school if you are a student.)',
+    q_education = models.CharField(initial=None,verbose_name='What is the highest level of study that you have completed?(Use your current year in school if you are a student.)',
                                 choices=['College Freshman (first-year)', 'College Sophomore (second-year)', 'College Junior (third-year)',
                                 'College Senior (fourth-year)', 'Graduate (first-year)', 'Graduate (second-year)', 'Graduate (third-year)',
                                 'Graduate (4+ years)'])
-    q_major = models.CharField(initial=None,blank=True,verbose_name='Which of the following best describes your current major course of study?)',
+    q_major = models.CharField(initial=None,verbose_name='Which of the following best describes your current major course of study?)',
                                 choices=['No Major or Pre-College', 'Arts/Humanities/Education', 'Business/Management (including MBA)',
                                 'Economics', 'Politics', 'Psychology', 'Other Social Science', 'Law School (but not pre-law)',
                                 'Medical/Nursing (but not pre-med)', 'Math/Science/Engineering/Computer Science', 'Other']
                                 )
-    q_siblings = models.CharField(initial=None,blank=True,verbose_name='How many brothers and sisters do you have? (Please do not count yourself.)',
+    q_siblings = models.CharField(initial=None,verbose_name='How many brothers and sisters do you have? (Please do not count yourself.)',
                                 choices=['no others', '1 other', '2 others', '3 others', '4 others', '5 others', '6 or more others'])
-    q_vote = models.CharField(initial=None,blank=True,
+    q_vote = models.CharField(initial=None,
                               choices=['Yes', 'No'],
                               verbose_name='Have you ever voted in a state or federal government election (in any country)?',
                               widget=widgets.RadioSelect())
-    q_job = models.CharField(initial=None,blank=True,verbose_name='What is the most appropriate description of your primary employment (if any)?',
+    q_job = models.CharField(initial=None,verbose_name='What is the most appropriate description of your primary employment (if any)?',
                                choices=['Not Employed/Student(without outside employment)', 'Agriculture', 'Business/Management', 'Clerical',
                                'Manufacturing', 'Government (non-military)', 'homemaker', 'Military', 'Professional (Law, Medicine, Architecture)',
                                'Research or Research Assistant', 'Teaching or Teaching Assistant', 'Waitperson/Food Service', 'Other'])
-    q_income = models.CharField(initial=None,blank=True,verbose_name='Which category best corresponds to the combined income for all members of your household?(Please guess if you are not sure.)',
+    q_income = models.CharField(initial=None,verbose_name='Which category best corresponds to the combined income for all members of your household?(Please guess if you are not sure.)',
                                choices=['Below $10,000', '$10,001 - $20,000', '$20,001 - $30,000', '$30,001 - $40,000',
                                '$40,001 - $50,000', '$50,001 - $60,000', '$60,001 - $70,000', '$70,001 - $80,000',
                                '$80,001 - $90,000', '$90,001 - $100,000', '$100,001 - $120,000', '$120,001 - $140,000',

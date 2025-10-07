@@ -8,7 +8,7 @@
 {% block content %}
 
     <p>
-        Please answer the following questions.
+        Please answer the following questions. <strong>All questions marked with * are required.</strong>
     </p>
 
     {% formfield player.q_country %}
@@ -24,6 +24,9 @@
     {% formfield player.q_vote %}
     {% formfield player.q_job %}
     {% formfield player.q_income %}
+
+    <hr>
+    <p><em>The following questions are optional:</em></p>
     {% formfield player.q_instruction1 %}
     {% formfield player.q_instruction2 %}
     {% formfield player.q_instruction3 %}

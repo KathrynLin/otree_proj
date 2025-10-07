@@ -1,12 +1,14 @@
-from otree.api import *
 # -*- coding: utf-8 -*-
+from otree.api import Page, WaitPage
+from .models import Constants
+
 
 class Contribute(Page):
 
     """Player: Choose how much to contribute"""
 
     form_model = "player"
-    form_fields = ['contribution']
+    form_fields = ['contribution', 'calculator_usage_log']
 
     def vars_for_template(self):
 
@@ -14,6 +16,7 @@ class Contribute(Page):
             'player_in_previous_rounds': self.player.in_previous_rounds(),
             'player_in_all_rounds': self.player.in_all_rounds()
         }
+
 
     #timeout_submission = {'contribution': c(Constants.endowment/2)}
 
@@ -30,6 +33,9 @@ class Results(Page):
 
     """Players payoff: How much each has earned"""
 
+    form_model = "player"
+    form_fields = ['calculator_usage_log']
+
     def vars_for_template(self):
 
         return {
@@ -41,8 +47,11 @@ class Results(Page):
             'player_in_all_rounds': self.player.in_all_rounds()
         }
 
+
 class FinalResult(Page):
 
+    form_model = "player"
+    form_fields = ['calculator_usage_log']
 
     def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
@@ -61,6 +70,7 @@ class FinalResult(Page):
                 'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)
                 }
 
+
 # page_sequence = [Introduction,
 #             Question,
 #             Feedback,
@@ -68,9 +78,4 @@ class FinalResult(Page):
 #             ResultsWaitPage,
 #             Results,
 #             FinalResult]
-page_sequence = [
-            Contribute,
-            ResultsWaitPage,
-            Results,
-            FinalResult]
 page_sequence = [Contribute, ResultsWaitPage, Results, FinalResult]

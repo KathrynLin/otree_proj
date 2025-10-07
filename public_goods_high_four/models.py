@@ -78,3 +78,5 @@ class Player(BasePlayer):
     contribution = models.CurrencyField(
         choices=list(range(1, Constants.endowment + 1)),
     )
+    # Store calculator usage as JSON string for all submissions
+    calculator_usage_log = models.LongStringField(blank=True)

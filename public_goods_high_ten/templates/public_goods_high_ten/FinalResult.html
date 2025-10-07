@@ -11,31 +11,38 @@
         This is a summary of the rounds played.
     </p>
 
-    <table class="table" style="width:800px; margin-top:20px;">
-        <tr>
-          <th>Round</th>
-          <th>Your investment</th>
-          {% for i in other_players_range %}
-          <th>Member{{ i }}'s investment</th>
-          {% endfor %}
-          <th>Your earnings from the group account</th>
-          <th>Your total earnings</th>
-        </tr>
+    <table class="table">
         {% for p in player_in_all_rounds %}
             <tr>
-              <td>{{ p.subsession.round_number }}</td>
+              <th>Round {{ p.subsession.round_number }}</th>
+              <th>Your investment</th>
+              <th>Member 1</th>
+              <th>Member 2</th>
+              <th>Member 3</th>
+              <th>Member 4</th>
+              <th>Member 5</th>
+              <th>Member 6</th>
+              <th>Member 7</th>
+              <th>Member 8</th>
+              <th>Member 9</th>
+            </tr>
+            <tr>
+              <td>Investments:</td>
               <td>{{ p.contribution }}</td>
               {% for q in p.get_others_in_group %}
               <td>{{ q.contribution }}</td>
               {% endfor %}
-              <td>{{ p.group.individual_share }}</td>
-              <td>{{ p.payoff_each_round }}</td>
+            </tr>
+            <tr>
+              <td>Earnings:</td>
+              <td colspan="8">Group account: {{ p.group.individual_share }}</td>
+              <td colspan="2">Total: {{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
     </table>
 
     <p>
-        The 1 period that have been randomly drawn for payment is {{ paying_round }}
+        The period that have been randomly drawn for payment is period {{ paying_round }}
     </p>
 
     <p>
@@ -49,5 +56,7 @@
 
 
     {% next_button %}
+
+    {% include 'public_goods_high_ten/CalculatorLogger.html' %}
 
 {% endblock %}

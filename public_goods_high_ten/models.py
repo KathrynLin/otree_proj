@@ -17,8 +17,8 @@ omega = 10, n = 10.
 
 class Constants(BaseConstants):
     name_in_url = 'public_goods_high_ten'
-    players_per_group = 2
-    num_rounds = 2
+    players_per_group = 10
+    num_rounds = 20
     other_player_per_group = players_per_group - 1
 
 
@@ -78,3 +78,5 @@ class Player(BasePlayer):
     contribution = models.CurrencyField(
         choices=list(range(1, Constants.endowment + 1)),
     )
+    # Store calculator usage as JSON string for all submissions
+    calculator_usage_log = models.LongStringField(blank=True)

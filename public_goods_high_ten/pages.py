@@ -8,7 +8,7 @@ class Contribute(Page):
     """Player: Choose how much to contribute"""
 
     form_model = "player"
-    form_fields = ['contribution']
+    form_fields = ['contribution', 'calculator_usage_log']
 
     def vars_for_template(self):
 
@@ -30,6 +30,9 @@ class Results(Page):
 
     """Players payoff: How much each has earned"""
 
+    form_model = "player"
+    form_fields = ['calculator_usage_log']
+
     def vars_for_template(self):
 
         return {
@@ -46,6 +49,9 @@ class Results(Page):
 
 
 class FinalResult(Page):
+
+    form_model = "player"
+    form_fields = ['calculator_usage_log']
 
     def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds

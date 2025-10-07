@@ -48,7 +48,7 @@
       var member9 = $('#member9').val();
       var my = $('#myinvestment').val();
 
-      // Import caculator data
+      // Save calculator data to oTree database
          var dataPackage = {
            member1 : member1,
            member2 : member2,
@@ -64,22 +64,42 @@
            round_number : $(".session-round-number").text()
          };
 
-         $.ajax({
-             url: "https://bcb13b72.ngrok.io/otree/saveInputLowTen_result.php",
-             type: "POST",
-             async: false,
-             data: dataPackage,
-             dataType: "text",
-             success: function(d) {
-                 // alert("Saving information succeeded!");
-                 // alert("Thank you for submitting the task! Your HIT is being processed and evaluated as part of a quality check. You'll be paid soon.");
-             },
-             fail: function() {
-                 alert("Saving information failed!");
-             }
-         });
+         // Get existing calculator logs for THIS PAGE (using page-specific key)
+         var pageKey = 'calculator_logs_instructions_quiz';
+         var calculatorLogs = JSON.parse(localStorage.getItem(pageKey) || '[]');
 
-       //finish import
+         // Check if values have changed from the last submission
+         var shouldSave = true;
+         if (calculatorLogs.length > 0) {
+             var lastLog = calculatorLogs[calculatorLogs.length - 1];
+             if (lastLog.member1 === member1 &&
+                 lastLog.member2 === member2 &&
+                 lastLog.member3 === member3 &&
+                 lastLog.member4 === member4 &&
+                 lastLog.member5 === member5 &&
+                 lastLog.member6 === member6 &&
+                 lastLog.member7 === member7 &&
+                 lastLog.member8 === member8 &&
+                 lastLog.member9 === member9 &&
+                 lastLog.my === my) {
+                 shouldSave = false;
+                 console.log("Skipping save - values unchanged from last submission");
+             }
+         }
+
+         // Only save if values have changed
+         if (shouldSave) {
+             console.log("Saving calculator data:", dataPackage);
+             calculatorLogs.push({
+                 ...dataPackage,
+                 timestamp: new Date().toISOString(),
+                 participant_code: window.location.pathname.split('/')[2]
+             });
+             localStorage.setItem(pageKey, JSON.stringify(calculatorLogs));
+             console.log("Calculator data saved locally. Total submissions:", calculatorLogs.length);
+         }
+
+       //finish save
 
 
       var rho = 0.7;
