@@ -81,5 +81,7 @@ class Player(BasePlayer):
         choices=list(range(0, Constants.endowment + 1)),
     )
 
-    # Store calculator usage as JSON string for all submissions
-    calculator_usage_log = models.LongStringField(blank=True)
+    # Calculator usage per page - JSON array of calculator submissions
+    # Format: [{member1, member2, member3, my, timestamp, url}, ...]
+    calc_contribute = models.LongStringField(blank=True, initial='[]')
+    calc_results = models.LongStringField(blank=True, initial='[]')

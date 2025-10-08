@@ -28,26 +28,31 @@
     // });
 
     //calculater results
-    $('#cal').click(function(){
+    $('#cal').click(function(event){
       event.preventDefault();
+      console.log('[Calculator Quiz] Submit button clicked');
       var member1 = $('#member1').val();
       var member2 = $('#member2').val();
       var member3 = $('#member3').val();
       var my = $('#myinvestment').val();
+      console.log('[Calculator Quiz] Values:', {member1, member2, member3, my});
 
-      // Save calculator data to oTree database
+      // Save calculator data to page-specific localStorage key
          var dataPackage = {
            member1 : member1,
            member2 : member2,
            member3 : member3,
            my : my,
-           url : window.location.href,
-           round_number : $(".session-round-number-result").text()
+           timestamp : new Date().toISOString(),
+           url : window.location.href
          };
 
-         // Get existing calculator logs for THIS PAGE and THIS PARTICIPANT
+         // Determine which page we're on and use appropriate localStorage key
          var participantCode = window.location.pathname.split('/')[2];
-         var pageKey = 'calculator_logs_instructions_quiz_' + participantCode;
+         var sessionCode = $('#session-code').text();
+         var currentPage = window.location.pathname.split('/').slice(-2,-1)[0]; // e.g., "Introduction", "Question", "Feedback"
+         var pageKey = 'calc_' + currentPage.toLowerCase().substring(0,8) + '_' + sessionCode + '_' + participantCode;
+
          var calculatorLogs = JSON.parse(localStorage.getItem(pageKey) || '[]');
 
          // Check if values have changed from the last submission
@@ -59,23 +64,15 @@
                  lastLog.member3 === member3 &&
                  lastLog.my === my) {
                  shouldSave = false;
-                 console.log("Skipping save - values unchanged from last submission");
              }
          }
 
          // Only save if values have changed
          if (shouldSave) {
-             console.log("Saving calculator data:", dataPackage);
-             calculatorLogs.push({
-                 ...dataPackage,
-                 timestamp: new Date().toISOString(),
-                 participant_code: participantCode
-             });
+             calculatorLogs.push(dataPackage);
              localStorage.setItem(pageKey, JSON.stringify(calculatorLogs));
-             console.log("Calculator data saved locally. Total submissions:", calculatorLogs.length);
+             console.log("[Calculator]", currentPage, "saved. Total:", calculatorLogs.length);
          }
-
-       //finish save
 
 
       var rho = 0.7;

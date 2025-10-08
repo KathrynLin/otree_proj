@@ -7,6 +7,9 @@
 
 {% block content %}
 
+    <!-- Hidden session code for JavaScript access -->
+    <span id="session-code" style="display:none;">{{ session.code }}</span>
+
     <h3>Question 1</h3>
     <p>
         Your answer <span  class="text-info">{{ player.question11 }}</span> was {% if player.question11_correct %}<span class="text-success">correct</span>
@@ -188,9 +191,29 @@
     </p>
 
 
+    <!-- Hidden field to store calculator data for this page -->
+    <input type="hidden" name="calc_feedback" id="id_calc_feedback" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        // Match the key format from calculator: calc_feedback (8 chars)
+        var pageKey = 'calc_feedback_' + sessionCode + '_' + participantCode;
+
+        console.log('[Feedback Page] Looking for key:', pageKey);
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_feedback').val(logs);
+            console.log('[Feedback] Saving', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Feedback] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
+
     {% next_button %}
 
     {% include 'public_goods_low_four/Instructions_quiz.html' %}
-    {% include 'public_goods_low_four/CalculatorLogger.html' %}
 
 {% endblock %}

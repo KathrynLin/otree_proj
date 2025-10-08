@@ -9,9 +9,11 @@ class Introduction(Page):
     """Description of the game: How to play and returns expected"""
 
     form_model = "player"
-    form_fields = ['calculator_usage_log']
+    form_fields = ['calc_introduction']
 
     def is_displayed(self):
+        # Store reference to quiz player for access from public_goods app
+        self.participant.quiz_low_ten_player = self.player
         return True
 
 class Question(Page):
@@ -21,13 +23,13 @@ class Question(Page):
 
     form_model = "player"
     form_fields = ['question11','question12','question13',
-    'question21','question22','question23','question31','question32','question33','question4','question5','question6', 'calculator_usage_log' ]
+    'question21','question22','question23','question31','question32','question33','question4','question5','question6', 'calc_question' ]
 
 
 class Feedback(Page):
 
     form_model = "player"
-    form_fields = ['calculator_usage_log']
+    form_fields = ['calc_feedback']
 
     def is_displayed(self):
         return True

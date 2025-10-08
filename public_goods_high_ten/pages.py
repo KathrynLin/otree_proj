@@ -8,7 +8,7 @@ class Contribute(Page):
     """Player: Choose how much to contribute"""
 
     form_model = "player"
-    form_fields = ['contribution', 'calculator_usage_log']
+    form_fields = ['contribution', 'calc_contribute']
 
     def vars_for_template(self):
 
@@ -31,7 +31,7 @@ class Results(Page):
     """Players payoff: How much each has earned"""
 
     form_model = "player"
-    form_fields = ['calculator_usage_log']
+    form_fields = ['calc_results']
 
     def vars_for_template(self):
 
@@ -51,10 +51,25 @@ class Results(Page):
 class FinalResult(Page):
 
     form_model = "player"
-    form_fields = ['calculator_usage_log']
+    form_fields = []
 
     def is_displayed(self):
         return self.subsession.round_number == Constants.num_rounds
+
+    def live_method(self, data):
+        # Receive calculator data from JavaScript
+        if 'calculator_data' in data:
+            self.participant.vars['calculator_data'] = data['calculator_data']
+
+    def before_next_page(self):
+        # Save ALL accumulated calculator data to the quiz player's calculator_usage_log_all field
+        calculator_data = self.participant.vars.get('calculator_data', '[]')
+
+        # Find the quiz player for this participant
+        quiz_player = getattr(self.participant, 'quiz_high_ten_player', None)
+        if quiz_player and calculator_data:
+            # Save all accumulated data (quiz + game rounds) to the new field
+            quiz_player.calculator_usage_log_all = calculator_data
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()

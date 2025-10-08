@@ -61,62 +61,79 @@ SESSION_CONFIGS = [
         'name': 'quiz_high_ten',
         'display_name': "quiz_high_ten",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz_high_ten','payment_info'],
+        'app_sequence': ['quiz_high_ten', 'payment_info'],
                    },
 
     {
         'name': 'public_goods_high_ten',
         'display_name': "public_goods_high_ten",
         'num_demo_participants': 10,
-        'app_sequence': ['quiz_high_ten','public_goods_high_ten','my_survey','payment_info'],
+        'app_sequence': [
+            'quiz_high_ten',
+            'public_goods_high_ten',
+            'my_survey',
+            'payment_info'],
                    },
 
     {
         'name': 'quiz_high_four',
         'display_name': "quiz_high_four",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz_high_four','payment_info'],
+        'app_sequence': ['quiz_high_four', 'payment_info'],
                    },
 
     {
         'name': 'public_goods_high_four',
         'display_name': "public_goods_high_four",
         'num_demo_participants': 4,
-        'app_sequence': ['quiz_high_four','public_goods_high_four','my_survey', 'payment_info'],
+        'app_sequence': [
+            'quiz_high_four',
+            'public_goods_high_four',
+            'my_survey',
+            'payment_info',
+        ],
                    },
 
     {
         'name': 'quiz_low_ten',
         'display_name': "quiz_low_ten",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz_low_ten','payment_info'],
+        'app_sequence': ['quiz_low_ten', 'payment_info'],
                    },
 
     {
         'name': 'public_goods_low_ten',
         'display_name': "public_goods_low_ten",
         'num_demo_participants': 10,
-        'app_sequence': ['quiz_low_ten','public_goods_low_ten','my_survey','payment_info'],
+        'app_sequence': [
+            'quiz_low_ten',
+            'public_goods_low_ten',
+            'my_survey',
+            'payment_info'],
                    },
 
     {
         'name': 'quiz_low_four',
         'display_name': "quiz_low_four",
         'num_demo_participants': 1,
-        'app_sequence': ['quiz_low_four','payment_info'],
+        'app_sequence': ['quiz_low_four', 'payment_info'],
                    },
     {
         'name': 'my_survey',
         'display_name': "my_survey",
         'num_demo_participants': 1,
-        'app_sequence': ['my_survey','payment_info'],
+        'app_sequence': ['my_survey', 'payment_info'],
                    },
 
     {
         'name': 'public_goods_low_four',
         'display_name': "public_goods_low_four",
         'num_demo_participants': 4,
-        'app_sequence': ['quiz_low_four', 'public_goods_low_four', 'my_survey', 'payment_info'],
+        'app_sequence': [
+            'quiz_low_four',
+            'public_goods_low_four',
+            'my_survey',
+            'payment_info'],
                    },
 
 
@@ -129,6 +146,14 @@ ROOMS = [
         'display_name': 'Behavioral lab I',
         'participant_label_file': 'lab.txt',
     },
+]
+
+# Participant fields for cross-app data access
+PARTICIPANT_FIELDS = [
+    'quiz_high_ten_player',
+    'quiz_high_four_player',
+    'quiz_low_ten_player',
+    'quiz_low_four_player',
 ]
 
 # Modern oTree doesn't need augment_settings

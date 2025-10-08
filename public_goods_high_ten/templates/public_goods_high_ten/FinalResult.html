@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+    <!-- Hidden session code for JavaScript access -->
+    <span id="session-code" style="display:none;">{{ session.code }}</span>
 
     <p>
         This is a summary of the rounds played.
@@ -58,5 +60,6 @@
     {% next_button %}
 
     {% include 'public_goods_high_ten/CalculatorLogger.html' %}
+
 
 {% endblock %}

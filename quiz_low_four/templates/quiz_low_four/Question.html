@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Hidden session code for JavaScript access -->
+<span id="session-code" style="display:none;">{{ session.code }}</span>
+
 <style>
 /* Enhanced input box styling */
 .otree-form-group input[type="number"],
@@ -111,9 +115,29 @@
         <strong>Please note that in the real game, you won't know your group members' investments before you make the decision</strong>
     </p>
 
+    <!-- Hidden field to store calculator data for this page -->
+    <input type="hidden" name="calc_question" id="id_calc_question" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        // Match the key format from calculator: calc_question (8 chars)
+        var pageKey = 'calc_question_' + sessionCode + '_' + participantCode;
+
+        console.log('[Question Page] Looking for key:', pageKey);
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_question').val(logs);
+            console.log('[Question] Saving', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Question] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
+
     {% next_button %}
 
     {% include 'public_goods_low_four/Instructions_quiz.html' %}
-    {% include 'public_goods_low_four/CalculatorLogger.html' %}
 
 {% endblock %}

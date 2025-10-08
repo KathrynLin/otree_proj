@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Hidden session code for JavaScript access -->
+<span id="session-code" style="display:none;">{{ session.code }}</span>
+
 <style>
 /* Enhanced input box styling */
 .otree-form-group input[type="number"],
@@ -54,11 +58,11 @@
 </style>
 
     <p>
-      You will get 1.6 points for each correct answer.
+      You will get 0.4 point for each correct answer.
     </p>
     <h3>Question 1</h3>
     <p>
-      Suppose your group members invest 10, 5, 8 points respectively into the group account, and you invest 1 points into the group account.
+      Suppose your group members invest 10, 5, 8 points respectively into the group account, and you invest 1 point into the group account.
     </p>
 
     {% formfield player.question11 label="Your earnings from the group account would be" %}
@@ -97,7 +101,7 @@
 
     <h3>Question 5</h3>
     <p>
-      Your group members invested 8, 3, 1 points respectively. How much should you invest to maximize your total earnings?
+      Your group members invested 8, 4, 1 points respectively. How much should you invest to maximize your total earnings?
     </p>
     {% formfield player.question5 label="You should invest" %}
 
@@ -111,9 +115,29 @@
         <strong>Please note that in the real game, you won't know your group members' investments before you make the decision</strong>
     </p>
 
+    <!-- Hidden field to store calculator data for this page -->
+    <input type="hidden" name="calc_question" id="id_calc_question" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        // Match the key format from calculator: calc_question (8 chars)
+        var pageKey = 'calc_question_' + sessionCode + '_' + participantCode;
+
+        console.log('[Question Page] Looking for key:', pageKey);
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_question').val(logs);
+            console.log('[Question] Saving', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Question] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
+
     {% next_button %}
 
     {% include 'public_goods_high_four/Instructions_quiz.html' %}
-    {% include 'public_goods_high_four/CalculatorLogger.html' %}
 
 {% endblock %}

@@ -1,29 +1,24 @@
-<!-- Calculator Data Logger - Saves localStorage to hidden field on form submit -->
+<!-- Calculator Data Logger - Sends localStorage data to server via liveSend -->
 <script>
 $(document).ready(function() {
-    // Add hidden field if it doesn't exist
-    if ($('#id_calculator_usage_log').length === 0) {
-        $('form').append('<input type="hidden" name="calculator_usage_log" id="id_calculator_usage_log">');
+    // Send calculator data when FinalResult page loads
+    var participantCode = window.location.pathname.split('/')[2];
+    var sessionCode = $('#session-code').text();
+    var gameType = window.location.pathname.split('/')[3];
+    var pageKey = 'calculator_logs_' + gameType + '_' + sessionCode + '_' + participantCode;
+
+    console.log('[Calculator Logger] Looking for key:', pageKey);
+
+    var logs = localStorage.getItem(pageKey) || '[]';
+    var count = JSON.parse(logs).length;
+    console.log('[Calculator Logger] Found', count, 'calculator submissions');
+
+    // Send calculator data to server via liveSend
+    if (typeof liveSend === 'function') {
+        liveSend({'calculator_data': logs});
+        console.log('[Calculator Logger] Data sent to server via liveSend');
+    } else {
+        console.error('[Calculator Logger] liveSend function not available');
     }
-
-    // Auto-populate before form submission
-    $('form').submit(function() {
-        // Get participant code from URL
-        var participantCode = window.location.pathname.split('/')[2];
-
-        // Determine which page-specific key to use based on current page
-        var pageKey = 'calculator_logs_' + participantCode; // default for most pages
-        if (window.location.href.includes('Instructions_quiz') || window.location.href.includes('/quiz/')) {
-            pageKey = 'calculator_logs_instructions_quiz_' + participantCode;
-        }
-
-        var logs = localStorage.getItem(pageKey) || '[]';
-        $('#id_calculator_usage_log').val(logs);
-        var count = JSON.parse(logs).length;
-        console.log('[Calculator] Saving ' + count + ' submissions from key: ' + pageKey);
-
-        // DO NOT clear localStorage - each participant has their own key, so no conflicts
-        // This allows us to preserve data from previous pages
-    });
 });
 </script>

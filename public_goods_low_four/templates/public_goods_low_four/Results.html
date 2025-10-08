@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Result of Round {{subsession.round_number}}</h4>
+    <!-- Hidden session code for JavaScript access -->
+    <span id="session-code" style="display:none;">{{ session.code }}</span>
+
+    <h4>Result of Round <span class="session-round-number">{{subsession.round_number}}</span></h4>
     <table class="table-condensed" style="width:500px; margin-top:20px;">
         <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
         <tr><td>Other participants invested:</td><td></td></tr>
@@ -50,9 +53,30 @@
     </table>
     <p></p>
 
+    <!-- Hidden field to store calculator data for this page/round -->
+    <input type="hidden" name="calc_results" id="id_calc_results" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        var roundNum = {{ subsession.round_number }};
+        // Match the key format from calculator: calc_results (8 chars)
+        var pageKey = 'calc_results_r' + roundNum + '_' + sessionCode + '_' + participantCode;
+
+        console.log('[Results Page R' + roundNum + '] Looking for key:', pageKey);
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_results').val(logs);
+            console.log('[Results R' + roundNum + '] Saving', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Results R' + roundNum + '] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
+
     {% next_button %}
 
-    {% include 'public_goods_low_four/Instructions_quiz.html' %}
-    {% include 'public_goods_low_four/CalculatorLogger.html' %}
+    {% include 'public_goods_low_four/Instructions.html' %}
 
 {% endblock %}

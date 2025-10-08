@@ -1,26 +1,21 @@
-<!-- Calculator Data Logger - Saves localStorage to hidden field on form submit -->
+<!-- Calculator Data Logger - Stores localStorage via AJAX for server-side processing -->
 <script>
 $(document).ready(function() {
-    // Add hidden field if it doesn't exist
-    if ($('#id_calculator_usage_log').length === 0) {
-        $('form').append('<input type="hidden" name="calculator_usage_log" id="id_calculator_usage_log">');
+    // Send calculator data when page loads, before any form submission
+    var participantCode = window.location.pathname.split('/')[2];
+    var sessionCode = $('#session-code').text();
+    var gameType = window.location.pathname.split('/')[3]; // Extract game type from URL
+    // Convert quiz_* to public_goods_* to match the actual game type
+    if (gameType && gameType.startsWith('quiz_')) {
+        gameType = gameType.replace('quiz_', 'public_goods_');
     }
+    var pageKey = 'calculator_logs_' + gameType + '_' + sessionCode + '_' + participantCode;
 
-    // Auto-populate before form submission
-    $('form').submit(function() {
-        // Determine which page-specific key to use based on current page
-        var pageKey = 'calculator_logs'; // default for most pages
-        if (window.location.href.includes('Instructions_quiz') || window.location.href.includes('/quiz/')) {
-            pageKey = 'calculator_logs_instructions_quiz';
-        }
+    var logs = localStorage.getItem(pageKey) || '[]';
+    var count = JSON.parse(logs).length;
+    console.log('[Calculator] Sending ' + count + ' submissions from key: ' + pageKey);
 
-        var logs = localStorage.getItem(pageKey) || '[]';
-        $('#id_calculator_usage_log').val(logs);
-        var count = JSON.parse(logs).length;
-        console.log('[Calculator] Saving ' + count + ' submissions from key: ' + pageKey);
-
-        // DO NOT clear localStorage - each page has its own key, so no conflicts
-        // This allows us to preserve data from previous pages
-    });
+    // Send calculator data to server via live method immediately on page load
+    liveSend({'calculator_data': logs});
 });
 </script>

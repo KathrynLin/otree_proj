@@ -28,26 +28,31 @@
     // });
 
     //calculater results
-    $('#cal').click(function(){
+    $('#cal').click(function(event){
       event.preventDefault();
+      console.log('[Calculator Quiz] Submit button clicked');
       var member1 = $('#member1').val();
       var member2 = $('#member2').val();
       var member3 = $('#member3').val();
       var my = $('#myinvestment').val();
+      console.log('[Calculator Quiz] Values:', {member1, member2, member3, my});
 
-
-      // Save calculator data to oTree database
+      // Save calculator data to page-specific localStorage key
          var dataPackage = {
            member1 : member1,
            member2 : member2,
            member3 : member3,
            my : my,
-           url : window.location.href,
-           round_number : $(".session-round-number-result").text()
+           timestamp : new Date().toISOString(),
+           url : window.location.href
          };
 
-         // Get existing calculator logs for THIS PAGE (using page-specific key)
-         var pageKey = 'calculator_logs_instructions_quiz';
+         // Determine which page we're on and use appropriate localStorage key
+         var participantCode = window.location.pathname.split('/')[2];
+         var sessionCode = $('#session-code').text();
+         var currentPage = window.location.pathname.split('/').slice(-2,-1)[0]; // e.g., "Introduction", "Question", "Feedback"
+         var pageKey = 'calc_' + currentPage.toLowerCase().substring(0,8) + '_' + sessionCode + '_' + participantCode;
+
          var calculatorLogs = JSON.parse(localStorage.getItem(pageKey) || '[]');
 
          // Check if values have changed from the last submission
@@ -59,27 +64,20 @@
                  lastLog.member3 === member3 &&
                  lastLog.my === my) {
                  shouldSave = false;
-                 console.log("Skipping save - values unchanged from last submission");
              }
          }
 
          // Only save if values have changed
          if (shouldSave) {
-             console.log("Saving calculator data:", dataPackage);
-             calculatorLogs.push({
-                 ...dataPackage,
-                 timestamp: new Date().toISOString(),
-                 participant_code: window.location.pathname.split('/')[2]
-             });
+             calculatorLogs.push(dataPackage);
              localStorage.setItem(pageKey, JSON.stringify(calculatorLogs));
-             console.log("Calculator data saved locally. Total submissions:", calculatorLogs.length);
+             console.log("[Calculator]", currentPage, "saved. Total:", calculatorLogs.length);
          }
 
-       //finish save
 
       var rho = -2;
       var beta = 15;
-      if (member1*member2*member3*my == 0){
+      if (member1 === "" || member2 === "" || member3 === "" || my === ""){
         var income_from_group = NaN;
         var income_from_private = NaN;
         var total_income = NaN
@@ -149,16 +147,16 @@
             title: {
                 text: 'Your total earnings y'
             },
-            min:8,
-            max:17,
-            tickInterval: 2
+            min:7.5,
+            max:12,
+            tickInterval: 0.5
         },
 
         tooltip: {
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [16.50, 16.32, 15.50, 14.57, 13.60, 12.62, 11.63, 10.64, 9.64, 8.65],
+            data: [ 11.8983, 11.5658, 11.1673, 10.7338, 10.2778, 9.8057, 9.3215, 8.8278, 8.3263, 7.8182],
             pointStart: 1
         }]
     });
@@ -184,16 +182,16 @@
             title: {
                 text: 'Your total earnings y'
             },
-            min:23,
-            max:45,
-            tickInterval: 2
+            min:17.5,
+            max:20.5,
+            tickInterval: 0.5
         },
 
         tooltip: {
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [23.17, 32.66, 38.20, 41.11, 42.50, 43.02, 43.03, 42.73, 42.23, 41.60],
+            data: [20.1246, 20.1048, 19.9611, 19.7490, 19.4916, 19.2012, 18.8854, 18.5492, 18.1961, 17.8288],
             pointStart: 1
         }]
     });
@@ -206,7 +204,7 @@
             text: 'Your total earnings when everyone else invests 10 points',
             x: -20, //center
             style: {
-                fontSize: '14px'
+                fontSize: '16px'
             }
         },
         xAxis: {
@@ -219,16 +217,16 @@
             title: {
                 text: 'Your total earnings y'
             },
-            min:23,
-            max:80,
-            tickInterval: 5
+            min:28.8,
+            max:30.4,
+            tickInterval: 0.2
         },
 
         tooltip: {
             pointFormat: 'x = {point.x}, y = {point.y}'
         },
         series: [{
-            data: [23.78, 36.35, 46.93, 55.32, 61.69, 66.40, 69.81, 72.22, 73.89, 75.00],
+            data: [30.0674, 30.2492, 30.2733, 30.2097, 30.0874, 29.9221, 29.7235, 29.4979, 29.2500, 28.9832],
             pointStart: 1
         }]
     });
@@ -280,8 +278,8 @@
     </p>
 
     <p>
-        All transactions during the experiment will be calculated in terms of points: every 8 points equals 1 dollar in cash (8 points = $1).
-        For example, if you earn 16 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
+        All transactions during the experiment will be calculated in terms of points: every 2 points equals 1 dollar in cash (2 points = $1).
+        For example, if you earn 4 points during this session, you will be paid 2 dollars in cash at the end of the experiment.
         If your total earnings do not equal an integer, it will be rounded towards the nearest integer.
     </p>
 
@@ -290,7 +288,7 @@
         The total amount of points you earn during the session will be the sum of points you earn from each of the three parts:
 
     <ol type="1">
-      <li>At the end of the instructions, you will be asked to complete a set of review questions. You will get 1.6 points ($0.2) for every question you answer correctly.</li>
+      <li>At the end of the instructions, you will be asked to complete a set of review questions. You will get 0.4 points ($0.2) for every question you answer correctly.</li>
       <li>The investment game will consist of 20 rounds. At the end of the experiment, the computer will randomly select 1 round out of the 20 that you will get paid for. Each round is equally likely to be selected for payment.</li>
       <li>A lottery game will determine your payment from the final part of the experiment.</li>
     </ol>
@@ -300,7 +298,7 @@
         The investment game consists of 20 rounds. At the beginning of each round, you will be randomly matched with 3 other participants to form a group of 4.
         The composition of the groups will change every round. You will not be informed of the identity of the other group members.
         At the beginning of the round, each participant will receive 10 points. You will decide how to divide 10 points between two investment opportunities.
-        The return from the group account depends on the actions of your fellow group members. While the return from the private account depends only on your choices. You can invest any integer amount between 1 and 10 points, inclusive, in the group account. Meanwhile, other group members will independently make similar decisions. No one will be informed of the others’ decisions until everyone submits his or her decision.
+        The return from the group account depends on the actions of your fellow group members. While the return from the private account depends only on your choices. You can invest any integer amount between 0 and 10 points, inclusive, in the group account. Meanwhile, other group members will independently make similar decisions. No one will be informed of the others’ decisions until everyone submits his or her decision.
     </p>
 
 
@@ -356,31 +354,31 @@
    <ul>
     <li> <strong>The first example demonstrates the special case when everyone else invests 1 point in the group account. </strong>
        <ol>
-
-          <li> If everyone else in your group invests 1 point in the group account, and you invest 1 point, the total return from the group account would be 30.00 points. As a result, your earnings from the group account would be 7.50 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 10 points.
-          <li> If everyone else in your group invests 1 point in the group account, and you invest 5 points, the total return from the group account would be 34.41 points. As a result, your earnings from the group account would be 8.60 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 13.60  points.
-          <li> If everyone else in your group invests 1 point in the group account, and you invest 10 points, the total return from the group account would be 34.58 points. As a result, your earnings from the group account would be 8.65 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 8.65 points.
-       </ol>
-   <p>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 0 points.
+         <li> If everyone else in your group invests 1 point in the group account, and you invest 1 point, the total return from the group account would be 11.59 points. As a result, your earnings from the group account would be 2.90 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 11.90 points.
+          <li> If everyone else in your group invests 1 point in the group account, and you invest 5 points, the total return from the group account would be 21.11 points. As a result, your earnings from the group account would be 5.28 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 10.28 points.
+          <li> If everyone else in your group invests 1 point in the group account, and you invest 10 points, the total return from the group account would be 31.27 points. As a result, your earnings from the group account would be 7.82 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 7.82 points.
+      </ol>
+   <p>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 1 points.
    Move your mouse on the graph to see the exact numbers.</p>
    <div id="container2" style="width: 600px; height: 400px"></div>
 
    <li> <strong>The second example demonstrates the special case when everyone else invests 5 points in the group account. </strong>
       <ol>
-        <li> If everyone else in your group invests 5 points in the group account, and you invest 1 points, the total return from the group account would be 56.69 points. As a result, your earnings from the group account would be 14.17 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 23.17 points.
-        <li> If everyone else in your group invests 5 points in the group account, and you invest 5 points, the total return from the group account would be 150 points. As a result, your earnings from the group account would be 37.50 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 42.50 points.
-        <li> If everyone else in your group invests 5 points in the group account, and you invest 10 points, the total return from the group account would be 166.41 points. As a result, your earnings from the group account would be 41.60 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 41.60 points.
-      </ol>
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 1 points, the total return from the group account would be 44.50 points. As a result, your earnings from the group account would be 11.12 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 20.12 points.
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 5 points, the total return from the group account would be 58.00 points. As a result, your earnings from the group account would be 14.49 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 19.49 points.
+        <li> If everyone else in your group invests 5 points in the group account, and you invest 10 points, the total return from the group account would be 71.32 points. As a result, your earnings from the group account would be 17.83 points (a quarter of the total return). Your earnings from the private account would be 0 points, and your total earnings would be 17.83 points.
+    </ol>
   <p>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 5 points.</p>
   Move your mouse on the graph to see the exact numbers.</h5>
   <div id="container3" style="width: 600px; height: 400px"></div>
 
   <li> <strong>The third example demonstrates the special case when everyone else invests 10 points in the group account. </strong>
      <ol>
-        <li> If everyone else in your group invests 10 points in the group account, and you invest 1 points, the total return from the group account would be 59.12 points. As a result, your earnings from the group account would be 14.78 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 23.78 points.
-        <li> If everyone else in your group invests 10 points in the group account, and you invest 5 points, the total return from the group account would be 226.78 points. As a result, your earnings from the group account would be 56.69 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 61.69 points.
-        <li> If everyone else in your group invests 10 points in the group account, and you invest 10 points, the total return from the group account would be 300 points. As a result, your earnings from the group account would be 28.98 points (a quarter of group earnings). Your earnings from the private account would be 75 points, and your total earnings would be 75 points.
-     </ol>
+       <li> If everyone else in your group invests 10 points in the group account, and you invest 1 points, the total return from the group account would be 84.27 points. As a result, your earnings from the group account would be 21.07 points (a quarter of the total return). Your earnings from the private account would be 9 points, and your total earnings would be 30.07 points.
+
+       <li> If everyone else in your group invests 10 points in the group account, and you invest 5 points, the total return from the group account would be 100.35 points. As a result, your earnings from the group account would be 25.09 points (a quarter of the total return). Your earnings from the private account would be 5 points, and your total earnings would be 30.09 points.
+       <li> If everyone else in your group invests 10 points in the group account, and you invest 10 points, the total return from the group account would be 115.93 points. As a result, your earnings from the group account would be 28.98 points (a quarter of group earnings). Your earnings from the private account would be 0 points, and your total earnings would be 28.98 points.
+   </ol>
  <p>The following graph shows your <span style="color:red;">total earnings</span> if you invest X points when everyone else in your group invests 10 points.</p>
  Move your mouse on the graph to see the exact numbers.</h5>
  <div id="container4" style="width: 600px; height: 400px"></div>

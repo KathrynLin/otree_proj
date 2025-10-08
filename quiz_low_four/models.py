@@ -65,8 +65,11 @@ class Player(BasePlayer):
 
     num_correct_questions = models.IntegerField(initial=0)
 
-    # Store calculator usage as JSON string
-    calculator_usage_log = models.LongStringField(blank=True)
+    # Calculator usage per page - JSON array of calculator submissions
+    # Format: [{member1, member2, member3, my, timestamp, url}, ...]
+    calc_introduction = models.LongStringField(blank=True, initial='[]')
+    calc_question = models.LongStringField(blank=True, initial='[]')
+    calc_feedback = models.LongStringField(blank=True, initial='[]')
 
     def question11_correct(self):
         return self.question11 == Constants.question11_correct

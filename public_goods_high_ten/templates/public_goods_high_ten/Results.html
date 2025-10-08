@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Result of Round {{subsession.round_number}}</h4>
+    <!-- Hidden session code for JavaScript access -->
+    <span id="session-code" style="display:none;">{{ session.code }}</span>
+
+    <h4>Result of Round <span class="session-round-number">{{subsession.round_number}}</span></h4>
     <table class="table-condensed" style="width:500px; margin-top:20px;">
         <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
         <tr><td>Other participants invested:</td><td></td></tr>
@@ -16,7 +19,7 @@
 
         <tr><td colspan="2"><hr/></td></tr>
 
-        <tr><td>Total group income:</td><td>{{ total_group_income }}</td></tr>
+        <tr><td>Total group earnings:</td><td>{{ total_group_income }}</td></tr>
         <tr><td>Your earnings from the group account:</td><td>{{ earnings_from_public }}</td></tr>
         <tr><td>Your earnings from the private account:</td><td>{{earnings_from_private }}</td></tr>
 
@@ -30,11 +33,11 @@
         <tr>
             <th>Round</th>
             <th>Your investment</th>
-            {% for i in other_players_range %}
-            <th>Member{{ i }}'s investment</th>
-            {% endfor %}
-            <th>Your income from the group account</th>
-            <th>Your total income</th>
+            <th>Member1's investment</th>
+            <th>Member2's investment</th>
+            <th>Member3's investment</th>
+            <th>Your earnings from the group account</th>
+            <th>Your total earnings</th>
         </tr>
         {% for p in player_in_all_rounds %}
             <tr>
@@ -43,18 +46,37 @@
                 {% for q in p.get_others_in_group %}
                 <td>{{ q.contribution }}</td>
                 {% endfor %}
-                <td>{{ p.group.individual_share }}</td>
+                <td>{{ p.group.individual_share }}
                 <td>{{ p.payoff_each_round }}</td>
             </tr>
         {% endfor %}
     </table>
     <p></p>
 
+    <!-- Hidden field to store calculator data for this page/round -->
+    <input type="hidden" name="calc_results" id="id_calc_results" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        var roundNum = {{ subsession.round_number }};
+        // Match the key format from calculator: calc_results (8 chars)
+        var pageKey = 'calc_results_r' + roundNum + '_' + sessionCode + '_' + participantCode;
+
+        console.log('[Results Page R' + roundNum + '] Looking for key:', pageKey);
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_results').val(logs);
+            console.log('[Results R' + roundNum + '] Saving', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Results R' + roundNum + '] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
 
     {% next_button %}
 
-    {% include 'public_goods_high_ten/Instructions_quiz.html' %}
-    {% include 'public_goods_high_ten/CalculatorLogger.html' %}
-
+    {% include 'public_goods_high_ten/Instructions.html' %}
 
 {% endblock %}

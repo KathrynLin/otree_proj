@@ -8,14 +8,38 @@
 {% block content %}
     <stong>(Please turn off your cell phone. Thank you.)</strong>
 
+    <!-- Hidden session code for JavaScript access -->
+    <span id="session-code" style="display:none;">{{ session.code }}</span>
+
     {% include 'public_goods_high_ten/Instructions_quiz.html' %}
 
     <p>
         On the next page, you will have to answer 6 questions to make sure you understand the instructions correctly.
     </p>
 
-    {% next_button %}
+    <!-- Hidden field to store calculator data for this page -->
+    <input type="hidden" name="calc_introduction" id="id_calc_introduction" value="">
+    <script>
+    $(document).ready(function() {
+        var participantCode = window.location.pathname.split('/')[2];
+        var sessionCode = $('#session-code').text();
+        // Match the key format from calculator: calc_introduc (8 chars of "Introduction")
+        var pageKey = 'calc_introduc_' + sessionCode + '_' + participantCode;
 
-    {% include 'public_goods_high_ten/CalculatorLogger.html' %}
+        // Debug: show what's in localStorage
+        console.log('[Introduction Page] Looking for key:', pageKey);
+        console.log('[Introduction Page] All localStorage keys:', Object.keys(localStorage));
+
+        // Update hidden field before form submission
+        $('form').on('submit', function() {
+            var logs = localStorage.getItem(pageKey) || '[]';
+            $('#id_calc_introduction').val(logs);
+            console.log('[Introduction] Saving to form field:', JSON.parse(logs).length, 'calculator entries');
+            console.log('[Introduction] Data:', logs.substring(0, 200));
+        });
+    });
+    </script>
+
+    {% next_button %}
 
 {% endblock %}
