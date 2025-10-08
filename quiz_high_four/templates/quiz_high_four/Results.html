@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
-  <p>
-    You answered {{player.count_correct_questions}} questions correct in total. You earned {{player.set_payoff}} from taking the review questions,
-    which is {{payoff_so_far_money}}.
+  <p style="font-size: 1.2em; font-weight: bold;">
+    You answered <span style="color: red;">{{player.count_correct_questions}}</span> questions correct in total. You earned <span style="color: red;">{{player.set_payoff}}</span> from taking the review questions,
+    which is <span style="color: red;">{{payoff_so_far_money}}</span>.
   </p>
   <p>
     Please press the "next" button for the investment game.

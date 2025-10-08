@@ -9,6 +9,20 @@
     <!-- Hidden session code for JavaScript access -->
     <span id="session-code" style="display:none;">{{ session.code }}</span>
 
+    <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 30px;">
+        <p>
+            The period that have been randomly drawn for payment is period <span style="color: red;">{{ paying_round }}</span>
+        </p>
+
+        <p>
+            Therefore, you earned <span style="color: red;">{{ total_payoff }}</span> from the investment game.
+        </p>
+
+        <p>
+            In total, you earned <span style="color: red;">{{payoff_so_far}}</span> from the review questions and the investment game, which is <span style="color: red;">{{payoff_so_far_money}}</span>.
+        </p>
+    </div>
+
     <p>
         This is a summary of the rounds played.
     </p>
@@ -42,18 +56,6 @@
             </tr>
         {% endfor %}
     </table>
-
-    <p>
-        The period that have been randomly drawn for payment is period {{ paying_round }}
-    </p>
-
-    <p>
-        Therefore, you earned {{ total_payoff }} from the investment game.
-    </p>
-
-    <p>
-        In total, you earned {{payoff_so_far}} from the review questions and the investment game, which is {{payoff_so_far_money}}.
-    </p>
 
 
 

@@ -21,14 +21,18 @@
   Your choice list is {{player.choice_list}}.
 </p>
 
-<strong>
-  The decision chosen for payment is {{decision_for_payment}}. The corresponding choice is {{choice_for_payment}}.
-  The random number that determines the throw of the 10-sided die is {{die_num}}.
-  You earned {{payment}} from the lottery game.
-</strong>
+<div style="font-size: 1.2em; font-weight: bold;">
+  <p>
+    The decision chosen for payment is <span style="color: red;">{{decision_for_payment}}</span>. The corresponding choice is <span style="color: red;">{{choice_for_payment}}</span>.
+    The random number that determines the throw of the 10-sided die is <span style="color: red;">{{die_num}}</span>.
+    You earned <span style="color: red;">{{payment}}</span> from the lottery game.
+  </p>
+  <p>
+    In total, you earned <span style="color: red;">{{payoff_so_far_money}}</span> from the review questions, the investment game and the lottery game.
+  </p>
+</div>
 
 <p>
-  In total, you earned {{payoff_so_far_money}} from the review questions, the investment game and the lottery game.
 <!--
 Documentation on how to write a django template here:
 https://docs.djangoproject.com/en/dev/topics/templates/
