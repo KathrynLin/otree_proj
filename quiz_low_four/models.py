@@ -54,13 +54,13 @@ class Player(BasePlayer):
     question32 = models.CurrencyField()
     question33 = models.CurrencyField()
     question4 = models.CurrencyField(
-        choices=list(range(1, Constants.endowment + 1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
     question5 = models.CurrencyField(
-        choices=list(range(1, Constants.endowment + 1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
     question6 = models.CurrencyField(
-        choices=list(range(1, Constants.endowment + 1)),
+        choices=list(range(0, Constants.endowment + 1)),
     )
 
     num_correct_questions = models.IntegerField(initial=0)
