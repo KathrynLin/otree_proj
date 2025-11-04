@@ -44,15 +44,15 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
 
-    question11 = models.CurrencyField()
-    question12 = models.CurrencyField()
-    question13 = models.CurrencyField()
-    question21 = models.CurrencyField()
-    question22 = models.CurrencyField()
-    question23 = models.CurrencyField()
-    question31 = models.CurrencyField()
-    question32 = models.CurrencyField()
-    question33 = models.CurrencyField()
+    question11 = models.CurrencyField(decimal_places=2)
+    question12 = models.CurrencyField(decimal_places=2)
+    question13 = models.CurrencyField(decimal_places=2)
+    question21 = models.CurrencyField(decimal_places=2)
+    question22 = models.CurrencyField(decimal_places=2)
+    question23 = models.CurrencyField(decimal_places=2)
+    question31 = models.CurrencyField(decimal_places=2)
+    question32 = models.CurrencyField(decimal_places=2)
+    question33 = models.CurrencyField(decimal_places=2)
     question4 = models.CurrencyField(
         choices=list(range(0, Constants.endowment + 1)),
     )
