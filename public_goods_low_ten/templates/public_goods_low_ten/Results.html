@@ -6,51 +6,57 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Hidden session code for JavaScript access -->
+    <!-- Hidden session code and round number for JavaScript access -->
     <span id="session-code" style="display:none;">{{ session.code }}</span>
-
-    <h4>Result of Round <span class="session-round-number">{{subsession.round_number}}</span></h4>
-    <table class="table-condensed" style="width:500px; margin-top:20px;">
-        <tr><td>You invested:</td><td>{{ player.contribution }}</td></tr>
-        <tr><td>Other participants invested:</td><td></td></tr>
-        {% for p in player.get_others_in_group %}
-            <tr><td></td><td>{{ p.contribution }}</td></tr>
-        {% endfor %}
-
-        <tr><td colspan="2"><hr/></td></tr>
-
-        <tr><td>Total group earnings:</td><td>{{ total_group_income }}</td></tr>
-        <tr><td>Your earnings from the group account:</td><td>{{ earnings_from_public }}</td></tr>
-        <tr><td>Your earnings from the private account:</td><td>{{earnings_from_private }}</td></tr>
-
-        <tr><td colspan="2"><hr/></td></tr>
-
-        <tr><td>Thus your total earnings in this round:</td><td>{{ individual_earnings }}</td></tr>
-    </table>
+    <span id="round-number" style="display:none;">{{ subsession.round_number }}</span>
 
     <h4>Round history</h4>
-    <table class="table">
-        <tr>
-            <th>Round</th>
-            <th>Your investment</th>
-            <th>Member1's investment</th>
-            <th>Member2's investment</th>
-            <th>Member3's investment</th>
-            <th>Your earnings from the group account</th>
-            <th>Your total earnings</th>
-        </tr>
-        {% for p in player_in_all_rounds %}
-            <tr>
-                <td>{{ p.subsession.round_number }}</td>
-                <td>{{ p.contribution }}</td>
-                {% for q in p.get_others_in_group %}
-                <td>{{ q.contribution }}</td>
+    <div style="overflow-x: auto; width: 100%;">
+        <table class="table" style="min-width: 800px;">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Your investment</th>
+                    <th colspan="9" style="text-align: center; border-bottom: 2px solid #ddd;">Other members' investments</th>
+                    <th>Group account earnings</th>
+                    <th>Total earnings</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>M1</th>
+                    <th>M2</th>
+                    <th>M3</th>
+                    <th>M4</th>
+                    <th>M5</th>
+                    <th>M6</th>
+                    <th>M7</th>
+                    <th>M8</th>
+                    <th>M9</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in player_in_all_rounds %}
+                    <tr>
+                        <td><strong>{{ p.subsession.round_number }}</strong></td>
+                        <td><strong>{{ p.contribution }}</strong></td>
+                        {% for q in p.get_others_in_group %}
+                            <td>{{ q.contribution }}</td>
+                        {% endfor %}
+                        {% for i in "123456789" %}
+                            {% if forloop.counter > p.get_others_in_group|length %}
+                                <td>-</td>
+                            {% endif %}
+                        {% endfor %}
+                        <td>{{ p.group.individual_share }}</td>
+                        <td><strong>{{ p.payoff_each_round }}</strong></td>
+                    </tr>
                 {% endfor %}
-                <td>{{ p.group.individual_share }}
-                <td>{{ p.payoff_each_round }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+            </tbody>
+        </table>
+    </div>
     <p></p>
 
     <!-- Hidden field to store calculator data for this page/round -->
@@ -77,6 +83,7 @@
 
     {% next_button %}
 
-    {% include 'public_goods_low_ten/Instructions.html' %}
+    {% include 'public_goods_low_ten/Instructions_quiz.html' %}
+
 
 {% endblock %}

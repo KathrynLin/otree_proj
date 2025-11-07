@@ -6,63 +6,74 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Hidden session code for JavaScript access -->
-    <span id="session-code" style="display:none;">{{ session.code }}</span>
+<p>
+    This is a summary of the rounds played.
+</p>
+<p>
+    The period that have been randomly drawn for payment is period <span style="color: red;"><strong>{{ paying_round }}</strong></span>
+</p>
 
-    <div style="font-size: 1.2em; font-weight: bold; margin-bottom: 30px;">
-        <p>
-            The period that have been randomly drawn for payment is period <span style="color: red;">{{ paying_round }}</span>
-        </p>
+<p>
+    Therefore, you earned <span style="color: red;"><strong>{{ total_payoff }}</strong></span> from the investment game.
+</p>
 
-        <p>
-            Therefore, you earned <span style="color: red;">{{ total_payoff }}</span> from the investment game.
-        </p>
+<p>
+    In total, you earned <span style="color: red;"><strong>{{payoff_so_far}}</strong></span> from the review questions and the investment game, which is <span style="color: red;"><strong>{{payoff_so_far_money}}</strong></span>.
+</p>
 
-        <p>
-            In total, you earned <span style="color: red;">{{payoff_so_far}}</span> from the review questions and the investment game, which is <span style="color: red;">{{payoff_so_far_money}}</span>.
-        </p>
+
+    <div style="overflow-x: auto; width: 100%;">
+        <table class="table" style="min-width: 800px;">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Your investment</th>
+                    <th colspan="9" style="text-align: center; border-bottom: 2px solid #ddd;">Other members' investments</th>
+                    <th>Group account earnings</th>
+                    <th>Total earnings</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>M1</th>
+                    <th>M2</th>
+                    <th>M3</th>
+                    <th>M4</th>
+                    <th>M5</th>
+                    <th>M6</th>
+                    <th>M7</th>
+                    <th>M8</th>
+                    <th>M9</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in player_in_all_rounds %}
+                    <tr>
+                        <td><strong>{{ p.subsession.round_number }}</strong></td>
+                        <td><strong>{{ p.contribution }}</strong></td>
+                        {% for q in p.get_others_in_group %}
+                            <td>{{ q.contribution }}</td>
+                        {% endfor %}
+                        {% for i in "123456789" %}
+                            {% if forloop.counter > p.get_others_in_group|length %}
+                                <td>-</td>
+                            {% endif %}
+                        {% endfor %}
+                        <td>{{ p.group.individual_share }}</td>
+                        <td><strong>{{ p.payoff_each_round }}</strong></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <p>
-        This is a summary of the rounds played.
-    </p>
 
-    <table class="table">
-        {% for p in player_in_all_rounds %}
-            <tr>
-              <th>Round {{ p.subsession.round_number }}</th>
-              <th>Your investment</th>
-              <th>Member 1</th>
-              <th>Member 2</th>
-              <th>Member 3</th>
-              <th>Member 4</th>
-              <th>Member 5</th>
-              <th>Member 6</th>
-              <th>Member 7</th>
-              <th>Member 8</th>
-              <th>Member 9</th>
-            </tr>
-            <tr>
-              <td>Investments:</td>
-              <td>{{ p.contribution }}</td>
-              {% for q in p.get_others_in_group %}
-              <td>{{ q.contribution }}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              <td>Earnings:</td>
-              <td colspan="8">Group account: {{ p.group.individual_share }}</td>
-              <td colspan="2">Total: {{ p.payoff_each_round }}</td>
-            </tr>
-        {% endfor %}
-    </table>
 
 
 
     {% next_button %}
-
-    {% include 'public_goods_low_ten/CalculatorLogger.html' %}
-
 
     {% include 'public_goods_low_ten/Instructions.html' %}
 

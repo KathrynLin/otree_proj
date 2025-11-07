@@ -7,10 +7,11 @@
 
 {% block content %}
 
-    <!-- Hidden session code for JavaScript access -->
+    <!-- Hidden session code and round number for JavaScript access -->
     <span id="session-code" style="display:none;">{{ session.code }}</span>
+    <span id="round-number" style="display:none;">{{ subsession.round_number }}</span>
 
-    {% formfield player.contribution label="How much will you invest to the group account (from 1 to 10)?" %}
+    {% formfield player.contribution label="How much will you invest to the group account (from 0 to 10)?" %}
 
     <!-- Hidden field to store calculator data for this page/round -->
     <input type="hidden" name="calc_contribute" id="id_calc_contribute" value="">
@@ -18,7 +19,7 @@
     $(document).ready(function() {
         var participantCode = window.location.pathname.split('/')[2];
         var sessionCode = $('#session-code').text();
-        var roundNum = {{ subsession.round_number }};
+        var roundNum = parseInt($('#round-number').text(), 10);
         // Match the key format from calculator: calc_contribu (8 chars of "Contribute")
         var pageKey = 'calc_contribu_r' + roundNum + '_' + sessionCode + '_' + participantCode;
 

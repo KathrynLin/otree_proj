@@ -70,6 +70,9 @@ class Player(BasePlayer):
     calc_introduction = models.LongStringField(blank=True, initial='[]')
     calc_question = models.LongStringField(blank=True, initial='[]')
     calc_feedback = models.LongStringField(blank=True, initial='[]')
+    
+    # Calculator usage log for all pages (quiz + game rounds)
+    calculator_usage_log_all = models.LongStringField(blank=True, initial='[]')
 
     def question11_correct(self):
         return self.question11 == Constants.question11_correct

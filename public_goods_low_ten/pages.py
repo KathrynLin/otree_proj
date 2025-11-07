@@ -75,13 +75,16 @@ class FinalResult(Page):
         total_payoff = sum([p.payoff for p in player_in_all_rounds])
         paying_round = self.session.vars['paying_round']
         payoff_so_far = self.player.participant.payoff
+        payoff_so_far_money = payoff_so_far.to_real_world_currency(self.session)
+        total_earning_with_fee = payoff_so_far_money + 5
 
 
         return {'player_in_all_rounds': player_in_all_rounds,
                 'total_payoff': total_payoff,
                 'paying_round': paying_round,
                 'payoff_so_far': payoff_so_far,
-                'payoff_so_far_money': payoff_so_far.to_real_world_currency(self.session)
+                'payoff_so_far_money': payoff_so_far_money,
+                'total_earning_with_fee': total_earning_with_fee
                 }
 
 # page_sequence = [Introduction,
